@@ -15,12 +15,35 @@ Library/FailedAssetImports.txt
 Library/ScriptAssemblies
 Library/ScriptMapper
 Library/assetDatabase3
-Library/cache
+Library/cache*
 Library/expandedItems
-Library/metadata
-Library/previews
-Library/guidmapper
+Library/metadata*
+Library/previews*
+Library/guidmapper*
 Temp
 *.csproj
 *.pidb
 *.sln
+ Temp/
+ obj/
+ Build
+ Library/
+  
+ 
+     # ===================================== #
+     # Visual Studio / MonoDevelop generated #
+     # ===================================== #
+     ExportedObj/
+     *.svd
+     *.userprefs
+     *.csproj
+     *.pidb
+     *.suo
+     *.sln
+     *.user
+     *.unityproj
+     *.booproj
+     *.orig
+     *.app
+     *.exe
+     *.*_data
