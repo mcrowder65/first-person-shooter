@@ -5,7 +5,7 @@ public class StartMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
@@ -19,6 +19,6 @@ public class StartMenu : MonoBehaviour {
     {
         //TODO
 
-        Debug.Log("It worked!");
+        Debug.Log("penis");
     }
 }
