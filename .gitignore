@@ -47,3 +47,8 @@ Temp
      *.app
      *.exe
      *.*_data
+ProjectSettings/ProjectVersion.txt
+
+ProjectSettings/GraphicsSettings.asset
+
+ProjectSettings/ProjectSettings.asset
