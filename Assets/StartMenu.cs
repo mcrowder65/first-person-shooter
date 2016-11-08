@@ -19,6 +19,6 @@ public class StartMenu : MonoBehaviour {
     {
         //TODO
 
-        Debug.Log("penis");
+        Debug.Log("Change at 4:04pm 11/8");
     }
 }
