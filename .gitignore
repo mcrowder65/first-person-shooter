@@ -22,33 +22,3 @@ Library/previews*
 Library/guidmapper*
 Temp
 *.csproj
-*.pidb
-*.sln
- Temp/
- obj/
- Build
- Library/
-  
- 
-     # ===================================== #
-     # Visual Studio / MonoDevelop generated #
-     # ===================================== #
-     ExportedObj/
-     *.svd
-     *.userprefs
-     *.csproj
-     *.pidb
-     *.suo
-     *.sln
-     *.user
-     *.unityproj
-     *.booproj
-     *.orig
-     *.app
-     *.exe
-     *.*_data
-ProjectSettings/ProjectVersion.txt
-
-ProjectSettings/GraphicsSettings.asset
-
-ProjectSettings/ProjectSettings.asset
