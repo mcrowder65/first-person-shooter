@@ -7,7 +7,7 @@ Temp/*
 obj/Debug/Assembly-CSharp.dll
 obj/Debug/*/*
 Library/AssetImportState
-
+*.meta
 .DS_Store
 Library/AssetImportState
 Library/AssetServerCacheV3
