@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour {
 
@@ -19,6 +20,6 @@ public class StartMenu : MonoBehaviour {
     {
         //TODO
 
-        Debug.Log("It worked!");
+        SceneManager.LoadScene("ChoosePlayerMenu");
     }
 }
