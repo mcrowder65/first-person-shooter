@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib baymax.mtl
+mtllib detached baymax.mtl
 g default
 v -0.171880 1.963659 0.034160
 v -0.217185 1.963659 -0.088271
