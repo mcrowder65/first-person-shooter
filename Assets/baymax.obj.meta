@@ -1,0 +1,138 @@
+fileFormatVersion: 2
+guid: a8abb930bc113b14fbf24dc96644cac5
+timeCreated: 1478724361
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: baymax:group5_baymax:pasted__pSphere5
+    100004: baymax:group5_baymax:pasted__pSphere6
+    100006: baymax:pasted__pSphere3_baymax:group2
+    100008: baymax:pasted__pSphere4_baymax:group5
+    100010: baymax:pasted__pSphere7_baymax:group6
+    100012: baymax:pCube3
+    100014: baymax:pSphere1
+    100016: baymax:pSphere2
+    100018: baymax:pSphere3
+    100020: baymax:pSphere4
+    100022: baymax:pSphere5
+    100024: baymax:pSphere6
+    100026: baymax:pSphere7
+    400000: //RootNode
+    400002: baymax:group5_baymax:pasted__pSphere5
+    400004: baymax:group5_baymax:pasted__pSphere6
+    400006: baymax:pasted__pSphere3_baymax:group2
+    400008: baymax:pasted__pSphere4_baymax:group5
+    400010: baymax:pasted__pSphere7_baymax:group6
+    400012: baymax:pCube3
+    400014: baymax:pSphere1
+    400016: baymax:pSphere2
+    400018: baymax:pSphere3
+    400020: baymax:pSphere4
+    400022: baymax:pSphere5
+    400024: baymax:pSphere6
+    400026: baymax:pSphere7
+    2300000: baymax:group5_baymax:pasted__pSphere5
+    2300002: baymax:group5_baymax:pasted__pSphere6
+    2300004: baymax:pasted__pSphere3_baymax:group2
+    2300006: baymax:pasted__pSphere4_baymax:group5
+    2300008: baymax:pasted__pSphere7_baymax:group6
+    2300010: baymax:pCube3
+    2300012: baymax:pSphere1
+    2300014: baymax:pSphere2
+    2300016: baymax:pSphere3
+    2300018: baymax:pSphere4
+    2300020: baymax:pSphere5
+    2300022: baymax:pSphere6
+    2300024: baymax:pSphere7
+    3300000: baymax:group5_baymax:pasted__pSphere5
+    3300002: baymax:group5_baymax:pasted__pSphere6
+    3300004: baymax:pasted__pSphere3_baymax:group2
+    3300006: baymax:pasted__pSphere4_baymax:group5
+    3300008: baymax:pasted__pSphere7_baymax:group6
+    3300010: baymax:pCube3
+    3300012: baymax:pSphere1
+    3300014: baymax:pSphere2
+    3300016: baymax:pSphere3
+    3300018: baymax:pSphere4
+    3300020: baymax:pSphere5
+    3300022: baymax:pSphere6
+    3300024: baymax:pSphere7
+    4300000: baymax:group5_baymax:pasted__pSphere5
+    4300002: baymax:group5_baymax:pasted__pSphere6
+    4300004: baymax:pasted__pSphere3_baymax:group2
+    4300006: baymax:pasted__pSphere4_baymax:group5
+    4300008: baymax:pasted__pSphere7_baymax:group6
+    4300010: baymax:pCube3
+    4300012: baymax:pSphere1
+    4300014: baymax:pSphere2
+    4300016: baymax:pSphere3
+    4300018: baymax:pSphere4
+    4300020: baymax:pSphere5
+    4300022: baymax:pSphere6
+    4300024: baymax:pSphere7
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
