@@ -1,6 +1,6 @@
 
 *.csproj
-
+*.mtl
 Library/assetDatabase3
 
 Library/AssetImportState
