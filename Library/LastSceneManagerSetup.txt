@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/FlatMap.unity
+- path: Assets/ChoosePlayerMenu.unity
   isLoaded: 1
   isActive: 1
