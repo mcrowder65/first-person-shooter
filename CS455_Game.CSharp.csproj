@@ -63,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CharacterEnum.cs" />
+    <Compile Include="Assets\CharacterTools.cs" />
     <Compile Include="Assets\ChoosePlayer.cs" />
     <Compile Include="Assets\SquareScript.cs" />
     <Compile Include="Assets\StartMenu.cs" />

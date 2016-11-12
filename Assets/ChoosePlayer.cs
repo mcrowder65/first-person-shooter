@@ -5,6 +5,8 @@ public class ChoosePlayer : MonoBehaviour {
 
 
     public GameObject CurrentlyChosenCharacter;
+    public GameObject SelectedPlayerPanel;
+    public GameObject ModelPlaceholder;
     const float ROTATE_SPEED = 10000f;
 
 
@@ -20,4 +22,14 @@ public class ChoosePlayer : MonoBehaviour {
             CurrentlyChosenCharacter.transform.Rotate(Vector3.up, 5);
         }
 	}
+
+    public void ChangeCharacter(int character)
+    {
+        if (CurrentlyChosenCharacter != null)
+            Destroy(CurrentlyChosenCharacter);
+        CharacterEnum cEnum = (CharacterEnum)character;
+        GameObject model = CharacterTools.GetCharacterModel(cEnum, this, null);
+        model.transform.position = ModelPlaceholder.transform.position;
+        CurrentlyChosenCharacter = model;
+    }
 }
