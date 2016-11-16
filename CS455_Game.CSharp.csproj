@@ -63,11 +63,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="CS455_Game.CSharp.Plugins.csproj">
+      <Project>{28F40F10-E93A-184D-FAD5-2C9C7C81A364}</Project>
+      <Name>CS455_Game.CSharp.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\CharacterEnum.cs" />
     <Compile Include="Assets\CharacterTools.cs" />
     <Compile Include="Assets\ChoosePlayer.cs" />
     <Compile Include="Assets\SquareScript.cs" />
     <Compile Include="Assets\StartMenu.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
