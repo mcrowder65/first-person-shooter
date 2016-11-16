@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-
-public class PlayerController : MonoBehaviour
+using UnityEngine.Networking;
+public class PlayerController : NetworkBehaviour
 {
     public float moveSpeed = 30f;
     public float turnSpeed = 50f;
@@ -49,6 +49,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         rotateHorizontally();
 
         if (Utilities.isXboxController())
