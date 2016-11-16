@@ -2,17 +2,36 @@
 using System.Collections;
 
 public class BaymaxGun : MonoBehaviour {
-    bool isXboxController()
-    {
-        return Input.GetJoystickNames()[0].ToString() == "Controller (XBOX 360 For Windows)";
-    }
     // Use this for initialization
     void Start () {
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+    {
+        
+	    if(Utilities.isXboxController())
+        {
+
+            float triggerInput = Input.GetAxis("Triggers");
+            //Debug.Log(triggerInput);
+            if (triggerInput > 0)
+            { //left trigger
+                Debug.Log("Grenade!!!");
+            }
+            else if (triggerInput < 0)
+            { //right trigger
+                Debug.Log("shoot!!!");
+            }
+            
+        }
+        else
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                Debug.Log("shoot!!!");
+            }
+        }
 	}
 }

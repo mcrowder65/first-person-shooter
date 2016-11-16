@@ -49,7 +49,10 @@ public class BaymaxMovement : MonoBehaviour
         // Set orientation:
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, yaw, 0f);
     }
-    
+    void jump()
+    {
+        transform.Translate(new Vector3(0, 1, 0));
+    }
     
     // Update is called once per frame
     void Update ()
@@ -60,6 +63,10 @@ public class BaymaxMovement : MonoBehaviour
         {
             moveLeftOrRight (Input.GetAxis("Left joystick left right"));
             moveForwardsOrBackwards(Input.GetAxis("Left joystick forwards backwards"));
+            if(Input.GetKeyUp(KeyCode.JoystickButton0))
+            {
+                jump();
+            }
         }
         else
         {
@@ -79,10 +86,14 @@ public class BaymaxMovement : MonoBehaviour
             {
                 moveForwardsOrBackwards(1);
             }
+            if (Input.GetKeyUp(KeyCode.J))
+            {
+                jump();
+            }
         }
 		
-		if (Input.GetKeyUp (KeyCode.J))
-			transform.Translate (new Vector3 (0, 1, 0));
+		
+			
 
     }
 
