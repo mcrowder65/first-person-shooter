@@ -7,12 +7,9 @@ public class BaymaxMovement : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	
 	}
-
 	public float moveSpeed = 30f;
 	public float turnSpeed = 50f;
-
 	void moveForward ()
 	{
 		Vector3 vect = new Vector3 (-1, 0, 0);
@@ -24,21 +21,52 @@ public class BaymaxMovement : MonoBehaviour
 		Vector3 vect = new Vector3 (1, 0, 0);
 		transform.Translate (vect * moveSpeed * Time.deltaTime);
 	}
+    void moveLeft()
+    {
+        Vector3 vect = new Vector3(0, 0, -1);
+        transform.Translate(vect * moveSpeed * Time.deltaTime);
+    }
 
-	void rotateLeft ()
-	{
-		transform.Rotate (Vector3.up, -turnSpeed * Time.deltaTime);
-	}
+    void moveRight()
+    {
+        Vector3 vect = new Vector3(0, 0, 1);
+        transform.Translate(vect * moveSpeed * Time.deltaTime);
+    }
+    void rotateHorizontally()
+    {
+        yaw += speedH * Input.GetAxis("Mouse X");
 
-	void rotateRight ()
-	{
-		transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
-	}
-	// Update is called once per frame
-	void Update ()
-	{
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, yaw, 0.0f);
 
-		if (Input.GetKey (KeyCode.UpArrow)) {
+        // Wrap yaw:
+        while (yaw < 0f)
+        {
+            yaw += 360f;
+        }
+        while (yaw >= 360f)
+        {
+            yaw -= 360f;
+        }
+        // Set orientation:
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, yaw, 0f);
+    }
+    public float speedH = 2.0f;
+
+    private float yaw = -1f;
+    
+    // Update is called once per frame
+    void Update ()
+	{
+        if(yaw == -1f)
+        {
+            yaw = transform.eulerAngles.y;
+        }
+        //TODO remove this check when making the game live
+        if (Input.GetMouseButton(0))
+        {
+            rotateHorizontally();
+        }
+        if (Input.GetKey (KeyCode.UpArrow)) {
 			moveForward ();
 		}
 		if (Input.GetKey (KeyCode.DownArrow)) {
@@ -46,19 +74,23 @@ public class BaymaxMovement : MonoBehaviour
 		}
 
 		if (Input.GetKey (KeyCode.LeftArrow)) {
-			rotateLeft ();
+			moveLeft ();
 		}
             
 
 		if (Input.GetKey (KeyCode.RightArrow)) {
-			rotateRight ();
+			moveRight ();
 		}
 		if (Input.GetKeyUp (KeyCode.J))
 			transform.Translate (new Vector3 (0, 1, 0));
 	}
+    float ClampAngle(float angle, float min, float max)
+    {
+        if (angle < -360)
+            angle += 360;
+        if (angle > 360)
+            angle -= 360;
+        return Mathf.Clamp(angle, min, max);
+    }
 
-	void OnCollisionEnter (Collision collision)
-	{
-		Debug.Log ("Enter called.");
-	}
 }
