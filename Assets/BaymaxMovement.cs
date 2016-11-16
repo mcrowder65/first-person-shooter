@@ -14,10 +14,7 @@ public class BaymaxMovement : MonoBehaviour
     void Start()
     {
     }
-    bool isXboxController()
-    {
-        return Input.GetJoystickNames()[0].ToString() == "Controller (XBOX 360 For Windows)";
-    }
+
     void moveForwardsOrBackwards (float val)
 	{
 		Vector3 vect = new Vector3 (val, 0, 0);
@@ -37,7 +34,7 @@ public class BaymaxMovement : MonoBehaviour
             yaw = transform.eulerAngles.y;
         }
         
-        yaw += speedH * Input.GetAxis(isXboxController() ? "Right joystick horizontal" : "Mouse X");
+        yaw += speedH * Input.GetAxis(Utilities.isXboxController() ? "Right joystick horizontal" : "Mouse X");
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, yaw, 0.0f);
 
         // Wrap yaw:
@@ -59,7 +56,7 @@ public class BaymaxMovement : MonoBehaviour
 	{
         rotateHorizontally();
         
-        if(isXboxController())
+        if(Utilities.isXboxController())
         {
             moveLeftOrRight (Input.GetAxis("Left joystick left right"));
             moveForwardsOrBackwards(Input.GetAxis("Left joystick forwards backwards"));
