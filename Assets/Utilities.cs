@@ -8,6 +8,6 @@ static class Utilities
 {
     public static bool isXboxController()
     {
-        return Input.GetJoystickNames()[0].ToString() == "Controller (XBOX 360 For Windows)";
+        return Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0].ToString() == "Controller (XBOX 360 For Windows)";
     }
 }
