@@ -36,6 +36,7 @@ public class PlayerController : NetworkBehaviour
 		Camera playerCam = GetComponentInChildren<Camera> ();
 		foreach (Camera c in Camera.allCameras) {
 			if (c != playerCam) {
+				Debug.Log ("disabled!!!");
 				c.enabled = false;
 			}
 		}
@@ -83,14 +84,6 @@ public class PlayerController : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		Camera playerCam = GetComponentInChildren<Camera> ();
-		foreach (Camera c in Camera.allCameras) {
-			if (c != playerCam) {
-				c.enabled = false;
-			}
-		}
-		playerCam.enabled = true;
-        
 		if (!isLocalPlayer) {
 			return;
 		}
