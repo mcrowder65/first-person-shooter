@@ -35,7 +35,7 @@ public class PlayerController : NetworkBehaviour
 	{
 		Camera playerCam = GetComponentInChildren<Camera> ();
 		foreach (Camera c in Camera.allCameras) {
-			if (!c.equals (playerCam)) {
+			if (c != playerCam) {
 				c.enabled = false;
 			}
 		}
