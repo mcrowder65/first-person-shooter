@@ -83,7 +83,14 @@ public class PlayerController : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-
+		Camera playerCam = GetComponentInChildren<Camera> ();
+		foreach (Camera c in Camera.allCameras) {
+			if (c != playerCam) {
+				c.enabled = false;
+			} else {
+				c.enabled = true;
+			}
+		}
         
 		if (!isLocalPlayer) {
 			return;
