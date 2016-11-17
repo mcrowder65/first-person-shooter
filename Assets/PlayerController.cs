@@ -33,9 +33,7 @@ public class PlayerController : NetworkBehaviour
 
 	public override void OnStartLocalPlayer ()
 	{
-		if (GetComponent<NetworkView> ().isMine) {
-			GetComponent<Camera> ().enabled = true;
-		}
+		Debug.Log ("on start local player!!!!");
 		GetComponent<MeshRenderer> ().material.color = Color.blue;
 	}
 
