@@ -87,10 +87,9 @@ public class PlayerController : NetworkBehaviour
 		foreach (Camera c in Camera.allCameras) {
 			if (c != playerCam) {
 				c.enabled = false;
-			} else {
-				c.enabled = true;
 			}
 		}
+		playerCam.enabled = true;
         
 		if (!isLocalPlayer) {
 			return;
