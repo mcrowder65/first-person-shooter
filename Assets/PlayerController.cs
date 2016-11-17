@@ -33,6 +33,9 @@ public class PlayerController : NetworkBehaviour
 
 	public override void OnStartLocalPlayer ()
 	{
+		foreach (Camera c in Camera.allCameras) {
+			Debug.Log (c.ToString ());
+		}
 		Debug.Log ("on start local player!!!!");
 		GetComponent<MeshRenderer> ().material.color = Color.blue;
 	}
