@@ -33,6 +33,9 @@ public class PlayerController : NetworkBehaviour
 
 	public override void OnStartLocalPlayer ()
 	{
+		if (GetComponent<NetworkView> ().isMine) {
+			GetComponent<Camera> ().enabled = true;
+		}
 		GetComponent<MeshRenderer> ().material.color = Color.blue;
 	}
 
@@ -76,9 +79,6 @@ public class PlayerController : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (!networkView.isMine) {
-			camera.enabled = false;
-		}
 
         
 		if (!isLocalPlayer) {
