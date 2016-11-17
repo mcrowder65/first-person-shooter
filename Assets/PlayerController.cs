@@ -33,14 +33,6 @@ public class PlayerController : NetworkBehaviour
 
 	public override void OnStartLocalPlayer ()
 	{
-		Camera playerCam = GetComponentInChildren<Camera> ();
-		foreach (Camera c in Camera.allCameras) {
-			if (c != playerCam) {
-				Debug.Log ("disabled!!!");
-				c.enabled = false;
-			}
-		}
-		Debug.Log ("on start local player!!!!");
 		GetComponent<MeshRenderer> ().material.color = Color.blue;
 	}
 
@@ -85,8 +77,10 @@ public class PlayerController : NetworkBehaviour
 	void Update ()
 	{
 		if (!isLocalPlayer) {
+			GetComponentInChildren<Camera> ().enabled = false;
 			return;
 		}
+
 		rotateHorizontally ();
 
 		if (Utilities.isXboxController ()) {
@@ -123,7 +117,6 @@ public class PlayerController : NetworkBehaviour
 				CmdFire ();
 			}
 		}
-
 
 
 
