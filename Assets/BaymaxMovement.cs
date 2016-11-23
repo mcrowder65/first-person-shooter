@@ -33,16 +33,18 @@ public class BaymaxMovement : NetworkBehaviour
 
 	void rotateVertically ()
 	{
+		Camera cam = GetComponentInChildren<Camera> ();
+		//TODO figure out how to get this working only for camera :( 
 		if (pitch == -1f) {
-			pitch = transform.eulerAngles.x;
+			pitch = cam.transform.eulerAngles.x;
 		}
 		pitch -= speedV * Input.GetAxis (Utilities.isXboxController () ? "Right joystick vertical" : "Mouse Y");
 
-		transform.eulerAngles = new Vector3 (pitch, transform.eulerAngles.y, 0.0f);
+		cam.transform.eulerAngles = new Vector3 (pitch, cam.transform.eulerAngles.y, 0.0f);
 		// Clamp pitch:
 		pitch = Mathf.Clamp (pitch, -90f, 90f);
 
-		transform.eulerAngles = new Vector3 (pitch, transform.eulerAngles.y, 0f);
+		cam.transform.eulerAngles = new Vector3 (pitch, cam.transform.eulerAngles.y, 0f);
 	}
 
 	void rotateHorizontally ()
