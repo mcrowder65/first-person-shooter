@@ -9,6 +9,8 @@ public class BaymaxMovement : NetworkBehaviour
 	public float turnSpeed = 50f;
 	public float speedH = 2.0f;
 	private float yaw = -1f;
+	public float speedV = 2.0f;
+	private float pitch = -1f;
 	// Use this for initialization
 	void Start ()
 	{
@@ -27,9 +29,7 @@ public class BaymaxMovement : NetworkBehaviour
 		transform.Translate (vect * moveSpeed * Time.deltaTime);
 	}
 
-	public float speedV = 2.0f;
 
-	private float pitch = -1f;
 
 	void rotateVertically ()
 	{
