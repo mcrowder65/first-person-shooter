@@ -11,9 +11,11 @@ public class BaymaxMovement : NetworkBehaviour
 	private float yaw = -1f;
 	public float speedV = 2.0f;
 	private float pitch = -1f;
+	private Vector3 initialPosition = new Vector3 (4.4f, 53.2f, -70f);
 	// Use this for initialization
 	void Start ()
 	{
+		transform.Translate (initialPosition);
 	}
 
 
