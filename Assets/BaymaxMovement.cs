@@ -15,7 +15,7 @@ public class BaymaxMovement : NetworkBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		transform.Translate (initialPosition);
+//		transform.Translate (initialPosition);
 	}
 
 
@@ -103,7 +103,7 @@ public class BaymaxMovement : NetworkBehaviour
 			if (Input.GetKey (KeyCode.S)) {
 				moveForwardsOrBackwards (1);
 			}
-			if (Input.GetKeyUp (KeyCode.J)) {
+			if (Input.GetKeyUp (KeyCode.Space)) {
 				jump ();
 			}
 		}
