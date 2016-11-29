@@ -21,8 +21,6 @@ public class BaymaxMovement : NetworkBehaviour
         {
             transform.position = initialPosition;
         }
-
-
     }
 
 
@@ -85,8 +83,8 @@ public class BaymaxMovement : NetworkBehaviour
         transform.Translate(new Vector3(0, 1, 0));
     }
 
-    // Update is called once per frame
-    void Fire()
+    [Command]
+    void CmdFire()
     {
         // Create the Bullet from the Bullet Prefab
         var bullet = (GameObject)Instantiate(
@@ -96,6 +94,9 @@ public class BaymaxMovement : NetworkBehaviour
 
         // Add velocity to the bullet
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+
+        // Spawn the bullet on the Clients
+        NetworkServer.Spawn(bullet);
 
         // Destroy the bullet after 2 seconds
         Destroy(bullet, 2.0f);
@@ -117,6 +118,16 @@ public class BaymaxMovement : NetworkBehaviour
             if (Input.GetKeyUp(KeyCode.JoystickButton0))
             {
                 jump();
+            }
+            float triggerInput = Input.GetAxis("Triggers");
+            //Debug.Log(triggerInput);
+            if (triggerInput > 0)
+            { //left trigger
+                Debug.Log("Grenade!!!");
+            }
+            else if (triggerInput < 0)
+            { //right trigger
+              //				Fire ();
             }
         }
         else
@@ -140,6 +151,10 @@ public class BaymaxMovement : NetworkBehaviour
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 jump();
+            }
+            if(Input.GetKey(KeyCode.Mouse0))
+            {
+                CmdFire();
             }
         }
 
