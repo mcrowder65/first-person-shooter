@@ -99,7 +99,7 @@ public class BaymaxMovement : NetworkBehaviour
         NetworkServer.Spawn(bullet);
 
         // Destroy the bullet after 2 seconds
-        Destroy(bullet,6f);
+        Destroy(bullet, 1.5f);
     }
     void Update()
     {

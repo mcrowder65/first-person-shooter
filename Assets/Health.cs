@@ -6,27 +6,27 @@ using System.Collections;
 public class Health : NetworkBehaviour
 {
 
-	public const int maxHealth = 100;
+    public const int maxHealth = 100;
 
-	[SyncVar (hook = "OnChangeHealth")]
-	public int currentHealth = maxHealth;
+    [SyncVar(hook = "OnChangeHealth")]
+    public int currentHealth = maxHealth;
 
-	public RectTransform healthBar;
+    public RectTransform healthBar;
 
-	public void TakeDamage (int amount)
-	{
-		if (!isServer)
-			return;
+    public void TakeDamage(int amount)
+    {
+        if (!isServer)
+            return;
+        currentHealth -= amount;
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            Debug.Log("Dead!");
+        }
+    }
 
-		currentHealth -= amount;
-		if (currentHealth <= 0) {
-			currentHealth = 0;
-			Debug.Log ("Dead!");
-		}
-	}
-
-	void OnChangeHealth (int health)
-	{
-		healthBar.sizeDelta = new Vector2 (health, healthBar.sizeDelta.y);
-	}
+    void OnChangeHealth(int health)
+    {
+        healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+    }
 }
