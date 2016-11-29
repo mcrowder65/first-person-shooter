@@ -14,12 +14,13 @@ public class Bullet : MonoBehaviour {
 	}
     void OnCollisionEnter(Collision collision)
     {
-        /*var hit = collision.gameObject;
+        var hit = collision.gameObject;
         var health = hit.GetComponent<Health>();
         if (health != null)
         {
             health.TakeDamage(10);
-        }*/
+        }
        //DestroyImmediate(gameObject);
     }
 }
+//-229, 237, 0
