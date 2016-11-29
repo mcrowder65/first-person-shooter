@@ -99,7 +99,7 @@ public class BaymaxMovement : NetworkBehaviour
         NetworkServer.Spawn(bullet);
 
         // Destroy the bullet after 2 seconds
-        Destroy(bullet, 2.0f);
+        Destroy(bullet,6f);
     }
     void Update()
     {
@@ -127,7 +127,7 @@ public class BaymaxMovement : NetworkBehaviour
             }
             else if (triggerInput < 0)
             { //right trigger
-              //				Fire ();
+                CmdFire();
             }
         }
         else
