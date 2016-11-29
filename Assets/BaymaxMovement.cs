@@ -15,7 +15,7 @@ public class BaymaxMovement : NetworkBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-//		transform.Translate (initialPosition);
+		transform.Translate (initialPosition);
 	}
 
 
