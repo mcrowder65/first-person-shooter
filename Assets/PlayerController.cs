@@ -41,7 +41,7 @@ public abstract class PlayerController : NetworkBehaviour
     void rotateVertically()
     {
         Camera cam = GetComponentInChildren<Camera>();
-        //TODO figure out how to get this working only for camera :( 
+        var gun = transform.Find("SubmachineGun");
         if (pitch == -1f)
         {
             pitch = cam.transform.eulerAngles.x;
@@ -49,12 +49,15 @@ public abstract class PlayerController : NetworkBehaviour
         pitch -= speedV * Input.GetAxis(Utilities.isXboxController() ? "Right joystick vertical" : "Mouse Y");
 
         cam.transform.eulerAngles = new Vector3(pitch, cam.transform.eulerAngles.y, 0.0f);
+        gun.transform.eulerAngles = new Vector3(gun.transform.eulerAngles.x, gun.transform.eulerAngles.y, pitch);
         // Clamp pitch:
         pitch = Mathf.Clamp(pitch, -90f, 90f);
 
         cam.transform.eulerAngles = new Vector3(pitch, cam.transform.eulerAngles.y, 0f);
+        gun.transform.eulerAngles = new Vector3(gun.transform.eulerAngles.x, gun.transform.eulerAngles.y, pitch);
     }
 
+   
     void rotateHorizontally()
     {
         if (yaw == -1f)
@@ -83,24 +86,7 @@ public abstract class PlayerController : NetworkBehaviour
         transform.Translate(new Vector3(0, 1, 0));
     }
 
-    [Command]
-    void CmdFire()
-    {
-        // Create the Bullet from the Bullet Prefab
-        var bullet = (GameObject)Instantiate(
-            bulletPrefab,
-            bulletSpawn.position,
-            bulletSpawn.rotation);
-
-        // Add velocity to the bullet
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 12;
-
-        // Spawn the bullet on the Clients
-        NetworkServer.Spawn(bullet);
-
-        // Destroy the bullet after 2 seconds
-        Destroy(bullet, 1.5f);
-    }
+    public abstract void CmdFire();
     void Update()
     {
 

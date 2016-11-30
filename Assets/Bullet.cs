@@ -19,7 +19,6 @@ public class Bullet : MonoBehaviour {
         {
             return;
         }
-        Debug.Log(hit.ToString());
         // TODO if hit is the object shooting it, or hit is another bullet, do nothing.
         var health = hit.GetComponent<Health>();
         if (health != null)
