@@ -17,13 +17,22 @@ public class Health : NetworkBehaviour
     {
         if (!isServer)
             return;
+
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
-            currentHealth = 0;
-            Debug.Log("Dead!");
+            currentHealth = maxHealth;
+
+            // called on the Server, but invoked on the Clients
+            RpcRespawn();
         }
     }
+
+    void OnChangeHealth(int currentHealth)
+    {
+        healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+    }
+
     [ClientRpc]
     void RpcRespawn()
     {
@@ -32,9 +41,5 @@ public class Health : NetworkBehaviour
             // move back to zero location
             transform.position = Utilities.getNewRespawnPoint();
         }
-    }
-    void OnChangeHealth(int health)
-    {
-        healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
     }
 }
