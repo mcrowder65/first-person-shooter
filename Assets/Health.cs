@@ -24,7 +24,15 @@ public class Health : NetworkBehaviour
             Debug.Log("Dead!");
         }
     }
-
+    [ClientRpc]
+    void RpcRespawn()
+    {
+        if (isLocalPlayer)
+        {
+            // move back to zero location
+            transform.position = Utilities.getNewRespawnPoint();
+        }
+    }
     void OnChangeHealth(int health)
     {
         healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
