@@ -82,8 +82,16 @@ public abstract class PlayerController : NetworkBehaviour
     const int JUMP_FORCE = 2000;
 	void jump ()
 	{
-        GetComponent<Rigidbody>().AddForce(Vector3.up * JUMP_FORCE);
+        if (IsOnGround())
+        {
+            GetComponent<Rigidbody>().AddForce(Vector3.up * JUMP_FORCE);
+        }
 	}
+    bool IsOnGround()
+    {
+        float raycastDistance = GetComponent<Collider>().bounds.extents.y + 0.4f;
+        return Physics.Raycast(transform.position, -Vector3.up, raycastDistance);
+    }
 
 	//public abstract void CmdFire();
 	[Command]
