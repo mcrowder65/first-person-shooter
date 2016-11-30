@@ -15,12 +15,12 @@ public class Bullet : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {
         var hit = collision.gameObject;
-        Debug.Log(hit);
+        // TODO if hit is the object shooting it, or hit is another bullet, do nothing.
         var health = hit.GetComponent<Health>();
         if (health != null)
         {
             health.TakeDamage(10);
         }
-       Destroy(gameObject);
+       //Destroy(gameObject);
     }
 }
