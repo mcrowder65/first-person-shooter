@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-public class BaymaxMovement : NetworkBehaviour
+public abstract class PlayerController : NetworkBehaviour
 {
 
 
@@ -11,7 +11,7 @@ public class BaymaxMovement : NetworkBehaviour
     private float yaw = -1f;
     public float speedV = 2.0f;
     private float pitch = -1f;
-    
+
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     // Use this for initialization
@@ -152,7 +152,7 @@ public class BaymaxMovement : NetworkBehaviour
             {
                 jump();
             }
-            if(Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0))
             {
                 CmdFire();
             }
