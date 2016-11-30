@@ -27,8 +27,8 @@ static class Utilities
 	public static Vector3 getNewRespawnPoint ()
 	{
 		int min = 0;
-		int max = hearthSpawnPositions.Count;
+		int max = lockoutSpawnPositions.Count;
 		int randomIndex = rand.Next (min, max);
-		return hearthSpawnPositions [randomIndex];
+		return lockoutSpawnPositions [randomIndex];
 	}
 }

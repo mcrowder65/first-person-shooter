@@ -15,13 +15,11 @@ public abstract class PlayerController : NetworkBehaviour
 	public GameObject bulletPrefab;
 	public Transform bulletSpawn;
 	// Use this for initialization
-	void Start ()
-	{
-		if (isLocalPlayer) {
-			transform.position = Utilities.getNewRespawnPoint ();
-		}
-	}
 
+	public override void OnStartLocalPlayer ()
+	{
+		transform.position = Utilities.getNewRespawnPoint ();
+	}
 
 	void moveForwardsOrBackwards (float val)
 	{
