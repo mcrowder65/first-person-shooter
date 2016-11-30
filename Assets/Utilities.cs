@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine.SceneManagement;
 
 static class Utilities
 {
 	private static List<Vector3> lockoutSpawnPositions = new List<Vector3> (
 		                                                     new Vector3[] {
-			new Vector3 (4.4f, 53.2f, -70f),
 			new Vector3 (-2.44f, 70.73669f, -144.27f),
 			new Vector3 (88.73848f, 27.75312f, -5.229659f)
 		});
@@ -26,9 +26,10 @@ static class Utilities
 
 	public static Vector3 getNewRespawnPoint ()
 	{
+		string sceneName = SceneManager.GetActiveScene ().name;
 		int min = 0;
-		int max = lockoutSpawnPositions.Count;
+		int max = sceneName == "Lockout" ? lockoutSpawnPositions.Count : hearthSpawnPositions.Count;
 		int randomIndex = rand.Next (min, max);
-		return lockoutSpawnPositions [randomIndex];
+		return sceneName == "Lockout" ? lockoutSpawnPositions [randomIndex] : hearthSpawnPositions [randomIndex];
 	}
 }
