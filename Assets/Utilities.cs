@@ -13,7 +13,10 @@ static class Utilities
 			new Vector3 (88.73848f, 27.75312f, -5.229659f)
 		});
 	private static List<Vector3> hearthSpawnPositions = new List<Vector3> (
-		                                                    new Vector3[] { new Vector3 (312f, 28.5f, 154.2f) 	});
+		                                                    new Vector3[] { 
+			new Vector3 (312f, 28.5f, 154.2f),
+			new Vector3 (146.5f, 28.8f, 169.5f)
+		});
 	private static System.Random rand = new System.Random ();
 
 	public static bool isXboxController ()
@@ -26,7 +29,6 @@ static class Utilities
 		int min = 0;
 		int max = hearthSpawnPositions.Count;
 		int randomIndex = rand.Next (min, max);
-		Debug.Log (hearthSpawnPositions [randomIndex]);
 		return hearthSpawnPositions [randomIndex];
 	}
 }

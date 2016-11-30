@@ -17,9 +17,7 @@ public abstract class PlayerController : NetworkBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		Debug.Log ("start!");
 		if (isLocalPlayer) {
-			Debug.Log ("start!");
 			transform.position = Utilities.getNewRespawnPoint ();
 		}
 	}
@@ -95,7 +93,6 @@ public abstract class PlayerController : NetworkBehaviour
 		// Add velocity to the bullet
 		var canvas = transform.Find ("Canvas");
 		var crossHair = canvas.Find ("Crosshair");
-		Debug.Log (crossHair);
 		bullet.GetComponent<Rigidbody> ().velocity = bullet.transform.forward * 100;
 		bullet.GetComponent<Rigidbody> ().position = crossHair.position;
 		// Spawn the bullet on the Clients
@@ -112,6 +109,8 @@ public abstract class PlayerController : NetworkBehaviour
 			GetComponentInChildren<Camera> ().enabled = false;
 			return;
 		}
+		var hearth = transform.Find ("Hearth");
+		Debug.Log (hearth);
 		rotateHorizontally ();
 		rotateVertically ();
 		if (Utilities.isXboxController ()) {
