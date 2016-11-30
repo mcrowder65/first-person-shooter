@@ -11,7 +11,7 @@ Library/EditorUserBuildSettings.asset
 Library/metadata
 Library/ScriptMapper
 Library/ShaderCache
-
+*.meta
 Library/shadercompiler-UnityShaderCompiler0.log
 *.backup
 *.bakert
