@@ -121,7 +121,7 @@ public abstract class PlayerController : NetworkBehaviour
 	{
 
 		if (!isLocalPlayer) {
-//			GetComponentInChildren<Camera> ().enabled = false;
+			GetComponentInChildren<Camera> ().enabled = false;
 			return;
 		}
 		rotateHorizontally ();
