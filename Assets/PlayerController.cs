@@ -16,10 +16,10 @@ public abstract class PlayerController : NetworkBehaviour
 	public Transform bulletSpawn;
 	// Use this for initialization
 
-    public void Start()
-    {
-        Physics.gravity = new Vector3(0, -50, 0);
-    }
+	public void Start ()
+	{
+		Physics.gravity = new Vector3 (0, -50, 0);
+	}
 
 	public override void OnStartLocalPlayer ()
 	{
@@ -39,9 +39,11 @@ public abstract class PlayerController : NetworkBehaviour
 	}
 
 
-
-	void rotateVertically ()
+	[Command]
+	void CmdRotateVertically ()
 	{
+		var baymaxHead = transform.Find ("baymax11:baymax10:baymax5:baymax3:pSphere2");
+
 		Camera cam = GetComponentInChildren<Camera> ();
 		var gun = transform.Find ("SubmachineGun");
 		if (pitch == -1f) {
@@ -79,19 +81,20 @@ public abstract class PlayerController : NetworkBehaviour
 		transform.eulerAngles = new Vector3 (transform.eulerAngles.x, yaw, 0f);
 	}
 
-    const int JUMP_FORCE = 2000;
+	const int JUMP_FORCE = 2000;
+
 	void jump ()
 	{
-        if (IsOnGround())
-        {
-            GetComponent<Rigidbody>().AddForce(Vector3.up * JUMP_FORCE);
-        }
+		if (IsOnGround ()) {
+			GetComponent<Rigidbody> ().AddForce (Vector3.up * JUMP_FORCE);
+		}
 	}
-    bool IsOnGround()
-    {
-        float raycastDistance = GetComponent<Collider>().bounds.extents.y + 0.4f;
-        return Physics.Raycast(transform.position, -Vector3.up, raycastDistance);
-    }
+
+	bool IsOnGround ()
+	{
+		float raycastDistance = GetComponent<Collider> ().bounds.extents.y + 0.4f;
+		return Physics.Raycast (transform.position, -Vector3.up, raycastDistance);
+	}
 
 	//public abstract void CmdFire();
 	[Command]
@@ -118,13 +121,11 @@ public abstract class PlayerController : NetworkBehaviour
 	{
 
 		if (!isLocalPlayer) {
-			GetComponentInChildren<Camera> ().enabled = false;
+//			GetComponentInChildren<Camera> ().enabled = false;
 			return;
 		}
-		var hearth = transform.Find ("Hearth");
-		//Debug.Log (hearth);
 		rotateHorizontally ();
-		rotateVertically ();
+		CmdRotateVertically ();
 		if (Utilities.isXboxController ()) {
 			moveLeftOrRight (Input.GetAxis ("Left joystick left right"));
 			moveForwardsOrBackwards (Input.GetAxis ("Left joystick forwards backwards"));
