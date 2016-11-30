@@ -12,10 +12,11 @@ public class BaymaxController : PlayerController
             bulletPrefab,
             bulletSpawn.position,
             bulletSpawn.rotation);
-
         // Add velocity to the bullet
+        var canvas = transform.Find("Canvas");
+        var crossHair = canvas.Find("Crosshair");
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 100;
-
+        bullet.GetComponent<Rigidbody>().position = crossHair.position;
         // Spawn the bullet on the Clients
         NetworkServer.Spawn(bullet);
 
