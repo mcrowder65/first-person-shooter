@@ -69,15 +69,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\BaymaxGun.cs" />
-    <Compile Include="Assets\BaymaxMovement.cs" />
+    <Compile Include="Assets\BaymaxController.cs" />
     <Compile Include="Assets\Billboard.cs" />
     <Compile Include="Assets\Bullet.cs" />
     <Compile Include="Assets\CharacterEnum.cs" />
     <Compile Include="Assets\CharacterTools.cs" />
     <Compile Include="Assets\ChoosePlayer.cs" />
     <Compile Include="Assets\Health.cs" />
-    <Compile Include="Assets\PlayerCameraMovement.cs" />
     <Compile Include="Assets\PlayerController.cs" />
     <Compile Include="Assets\StartMenu.cs" />
     <Compile Include="Assets\Utilities.cs" />

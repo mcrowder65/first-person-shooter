@@ -16,6 +16,11 @@ public abstract class PlayerController : NetworkBehaviour
 	public Transform bulletSpawn;
 	// Use this for initialization
 
+    public void Start()
+    {
+        Physics.gravity = new Vector3(0, -50, 0);
+    }
+
 	public override void OnStartLocalPlayer ()
 	{
 		transform.position = Utilities.getNewRespawnPoint ();
@@ -74,9 +79,10 @@ public abstract class PlayerController : NetworkBehaviour
 		transform.eulerAngles = new Vector3 (transform.eulerAngles.x, yaw, 0f);
 	}
 
+    const int JUMP_FORCE = 2000;
 	void jump ()
 	{
-		transform.Translate (new Vector3 (0, 1, 0));
+        GetComponent<Rigidbody>().AddForce(Vector3.up * JUMP_FORCE);
 	}
 
 	//public abstract void CmdFire();
@@ -108,7 +114,7 @@ public abstract class PlayerController : NetworkBehaviour
 			return;
 		}
 		var hearth = transform.Find ("Hearth");
-		Debug.Log (hearth);
+		//Debug.Log (hearth);
 		rotateHorizontally ();
 		rotateVertically ();
 		if (Utilities.isXboxController ()) {
