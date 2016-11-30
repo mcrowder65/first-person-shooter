@@ -86,7 +86,28 @@ public abstract class PlayerController : NetworkBehaviour
         transform.Translate(new Vector3(0, 1, 0));
     }
 
-    public abstract void CmdFire();
+    //public abstract void CmdFire();
+    [Command]
+    public void CmdFire()
+    {
+        // Create the Bullet from the Bullet Prefab
+        var bullet = (GameObject)Instantiate(
+            bulletPrefab,
+            bulletSpawn.position,
+            bulletSpawn.rotation);
+        // Add velocity to the bullet
+        var canvas = transform.Find("Canvas");
+        var crossHair = canvas.Find("Crosshair");
+        Debug.Log(crossHair);
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 100;
+        bullet.GetComponent<Rigidbody>().position = crossHair.position;
+        // Spawn the bullet on the Clients
+        NetworkServer.Spawn(bullet);
+
+        // Destroy the bullet after 2 seconds
+        Destroy(bullet, 1.5f);
+    }
+    
     void Update()
     {
 
