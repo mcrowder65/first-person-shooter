@@ -13,11 +13,11 @@ public abstract class PlayerController : NetworkBehaviour
 	private float pitch = -1f;
 	public GameObject bulletPrefab;
 	public Transform bulletSpawn;
-	// Use this for initialization
-
+    // Use this for initialization
 	public void Start ()
 	{
-		Physics.gravity = new Vector3 (0, -50, 0);
+        updateScoreboard();
+        Physics.gravity = new Vector3 (0, -50, 0);
 	}
 
 	public override void OnStartLocalPlayer ()
@@ -77,12 +77,12 @@ public abstract class PlayerController : NetworkBehaviour
 		transform.eulerAngles = new Vector3 (transform.eulerAngles.x, yaw, 0f);
 	}
 
-	const int JUMP_FORCE = 2000;
+	
 
 	void jump ()
 	{
 		if (IsOnGround ()) {
-			GetComponent<Rigidbody> ().AddForce (Vector3.up * JUMP_FORCE);
+			GetComponent<Rigidbody> ().AddForce (Vector3.up * Constants.JUMP_FORCE);
 		}
 	}
 
@@ -93,31 +93,42 @@ public abstract class PlayerController : NetworkBehaviour
 	}
     bool deathByFalling()
     {
-        //TODO death! -1 on scoreboard?
-        
-        return transform.position.y <= -5f;
+        if(transform.position.y > Constants.DEATH_Y)
+        {
+            return false;
+        }
+        var health = GetComponent<Health>();
+        health.deathByFalling();
+        updateScoreboard();
+        return true;
     }
-	//public abstract void CmdFire();
 	[Command]
 	public void CmdFire ()
 	{
+        var canvas = transform.Find ("Canvas");
+		var crossHair = canvas.Find ("Crosshair");
 		// Create the Bullet from the Bullet Prefab
 		var bullet = (GameObject)Instantiate (
 			             bulletPrefab,
-			             bulletSpawn.position,
-			             bulletSpawn.rotation);
+                         crossHair.position,
+			             bulletSpawn.rotation,
+                         transform);
 		// Add velocity to the bullet
-		var canvas = transform.Find ("Canvas");
-		var crossHair = canvas.Find ("Crosshair");
+		
 		bullet.GetComponent<Rigidbody> ().velocity = bullet.transform.forward * 100;
-		bullet.GetComponent<Rigidbody> ().position = crossHair.position;
 		// Spawn the bullet on the Clients
 		NetworkServer.Spawn (bullet);
-
+        
 		// Destroy the bullet after 2 seconds
 		Destroy (bullet, 1.5f);
 	}
-
+    public void updateScoreboard()
+    {
+        var canvas = transform.Find("Canvas");
+        var scoreboard = canvas.Find("Scoreboard");
+        var health = GetComponent<Health>();
+        scoreboard.GetComponent<UnityEngine.UI.Text>().text = "Kills: " + health.kills + " Deaths: " + health.deaths;
+    }
 	void Update ()
 	{
 
@@ -127,14 +138,8 @@ public abstract class PlayerController : NetworkBehaviour
 		}
         if (deathByFalling())
         {
-            var health = GetComponent<Health>();
-            health.deathByFalling();
-            var canvas = transform.Find("Canvas");
-            var scoreboard = canvas.Find("Scoreboard");
-            scoreboard.GetComponent<UnityEngine.UI.Text>().text = "dead!";
             return;
         }
-            
 		rotateHorizontally ();
 		CmdRotateVertically ();
 		if (Utilities.isXboxController ()) {
