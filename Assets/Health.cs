@@ -6,10 +6,10 @@ using System.Collections;
 public class Health : NetworkBehaviour
 {
 
-	public const int maxHealth = 100;
 
-	[SyncVar (hook = "OnChangeHealth")]
-	public int currentHealth = maxHealth;
+
+    [SyncVar(hook = "OnChangeHealth")]
+    public int currentHealth = Constants.MAX_HEALTH;
 
 	public RectTransform healthBar;
 
@@ -20,7 +20,7 @@ public class Health : NetworkBehaviour
 
 		currentHealth -= amount;
 		if (currentHealth <= 0) {
-			currentHealth = maxHealth;
+			currentHealth = Constants.MAX_HEALTH; 
 
 			// called on the Server, but invoked on the Clients
 			RpcRespawn ();

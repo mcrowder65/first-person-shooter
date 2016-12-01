@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
-
+using UnityEngine.SceneManagement;
 public abstract class PlayerController : NetworkBehaviour
 {
 
@@ -92,7 +92,12 @@ public abstract class PlayerController : NetworkBehaviour
 		float raycastDistance = GetComponent<Collider> ().bounds.extents.y + 0.4f;
 		return Physics.Raycast (transform.position, -Vector3.up, raycastDistance);
 	}
+    bool deathByFalling()
+    {
+        //TODO death! -1 on scoreboard?
 
+        return transform.position.y <= -5f;
+    }
 	//public abstract void CmdFire();
 	[Command]
 	public void CmdFire ()
@@ -121,6 +126,14 @@ public abstract class PlayerController : NetworkBehaviour
 			GetComponentInChildren<Camera> ().enabled = false;
 			return;
 		}
+        if (deathByFalling())
+        {
+            transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+            var health = GetComponent<Health>();
+            health.TakeDamage(Constants.MAX_HEALTH);
+            return;
+        }
+            
 		rotateHorizontally ();
 		CmdRotateVertically ();
 		if (Utilities.isXboxController ()) {
