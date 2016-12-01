@@ -38,11 +38,8 @@ public abstract class PlayerController : NetworkBehaviour
 		transform.Translate (vect * moveSpeed * Time.deltaTime);
 	}
 
-
-	[Command]
 	void CmdRotateVertically ()
 	{
-		var baymaxHead = transform.Find ("baymax11:baymax10:baymax5:baymax3:pSphere2");
 
 		Camera cam = GetComponentInChildren<Camera> ();
 		var gun = transform.Find ("SubmachineGun");
@@ -58,7 +55,7 @@ public abstract class PlayerController : NetworkBehaviour
 
 		cam.transform.eulerAngles = new Vector3 (pitch, cam.transform.eulerAngles.y, 0f);
 		gun.transform.eulerAngles = new Vector3 (gun.transform.eulerAngles.x, gun.transform.eulerAngles.y, pitch);
-	}
+    }
 
    
 	void rotateHorizontally ()
