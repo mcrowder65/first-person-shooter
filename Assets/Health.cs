@@ -8,13 +8,13 @@ public class Health : NetworkBehaviour
 
 
 
-    [SyncVar(hook = "OnChangeHealth")]
-    public int currentHealth = Constants.MAX_HEALTH;
-    public int deaths = 0;
-    public int kills = 0;
+	[SyncVar (hook = "OnChangeHealth")]
+	public int currentHealth = Constants.MAX_HEALTH;
+	public int deaths = 0;
+	public int kills = 0;
 	public RectTransform healthBar;
 
-	public void TakeDamage (int amount, GameObject firer)
+	public void TakeDamage (int amount, Transform firer)
 	{
 		if (!isServer)
 			return;
@@ -22,20 +22,25 @@ public class Health : NetworkBehaviour
 		currentHealth -= amount;
 		if (currentHealth <= 0) {
 			currentHealth = Constants.MAX_HEALTH;
-            deaths++;
-            //firer.GetComponent<Health>().kills++;
-            GetComponentInParent<PlayerController>().updateScoreboard();
+			deaths++;
+			Debug.Log (firer.GetComponent < Health> ().kills);
+			
+			firer.GetComponent<Health> ().kills++;
+			firer.GetComponent<PlayerController> ().updateScoreboard ();
+			GetComponentInParent<PlayerController> ().updateScoreboard ();
 			// called on the Server, but invoked on the Clients
 			RpcRespawn ();
 		}
 	}
-    public void deathByFalling()
-    {
-        currentHealth = Constants.MAX_HEALTH;
-        transform.position = Utilities.getNewRespawnPoint();
-        deaths++;
-        kills--;
-    }
+
+	public void deathByFalling ()
+	{
+		currentHealth = Constants.MAX_HEALTH;
+		transform.position = Utilities.getNewRespawnPoint ();
+		deaths++;
+		kills--;
+	}
+
 	void OnChangeHealth (int currentHealth)
 	{
 		healthBar.sizeDelta = new Vector2 (currentHealth, healthBar.sizeDelta.y);

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+
 public abstract class PlayerController : NetworkBehaviour
 {
 
@@ -13,11 +14,11 @@ public abstract class PlayerController : NetworkBehaviour
 	private float pitch = -1f;
 	public GameObject bulletPrefab;
 	public Transform bulletSpawn;
-    // Use this for initialization
+	// Use this for initialization
 	public void Start ()
 	{
-        updateScoreboard();
-        Physics.gravity = new Vector3 (0, -50, 0);
+		updateScoreboard ();
+		Physics.gravity = new Vector3 (0, -50, 0);
 	}
 
 	public override void OnStartLocalPlayer ()
@@ -54,7 +55,7 @@ public abstract class PlayerController : NetworkBehaviour
 
 		cam.transform.eulerAngles = new Vector3 (pitch, cam.transform.eulerAngles.y, 0f);
 		gun.transform.eulerAngles = new Vector3 (gun.transform.eulerAngles.x, gun.transform.eulerAngles.y, pitch);
-    }
+	}
 
    
 	void rotateHorizontally ()
@@ -91,44 +92,46 @@ public abstract class PlayerController : NetworkBehaviour
 		float raycastDistance = GetComponent<Collider> ().bounds.extents.y + 0.4f;
 		return Physics.Raycast (transform.position, -Vector3.up, raycastDistance);
 	}
-    bool deathByFalling()
-    {
-        if(transform.position.y > Constants.DEATH_Y)
-        {
-            return false;
-        }
-        var health = GetComponent<Health>();
-        health.deathByFalling();
-        updateScoreboard();
-        return true;
-    }
+
+	bool deathByFalling ()
+	{
+		if (transform.position.y > Constants.DEATH_Y) {
+			return false;
+		}
+		var health = GetComponent<Health> ();
+		health.deathByFalling ();
+		updateScoreboard ();
+		return true;
+	}
+
 	[Command]
 	public void CmdFire ()
 	{
-        var canvas = transform.Find ("Canvas");
+		var canvas = transform.Find ("Canvas");
 		var crossHair = canvas.Find ("Crosshair");
 		// Create the Bullet from the Bullet Prefab
 		var bullet = (GameObject)Instantiate (
 			             bulletPrefab,
-                         crossHair.position,
+			             crossHair.position,
 			             bulletSpawn.rotation,
-                         transform);
+			             transform);
 		// Add velocity to the bullet
 		
 		bullet.GetComponent<Rigidbody> ().velocity = bullet.transform.forward * 100;
 		// Spawn the bullet on the Clients
 		NetworkServer.Spawn (bullet);
-        
 		// Destroy the bullet after 2 seconds
 		Destroy (bullet, 1.5f);
 	}
-    public void updateScoreboard()
-    {
-        var canvas = transform.Find("Canvas");
-        var scoreboard = canvas.Find("Scoreboard");
-        var health = GetComponent<Health>();
-        scoreboard.GetComponent<UnityEngine.UI.Text>().text = "Kills: " + health.kills + " Deaths: " + health.deaths;
-    }
+
+	public void updateScoreboard ()
+	{
+		var canvas = transform.Find ("Canvas");
+		var scoreboard = canvas.Find ("Scoreboard");
+		var health = GetComponent<Health> ();
+		scoreboard.GetComponent<UnityEngine.UI.Text> ().text = "Kills: " + health.kills + " Deaths: " + health.deaths;
+	}
+
 	void Update ()
 	{
 
@@ -136,10 +139,9 @@ public abstract class PlayerController : NetworkBehaviour
 			GetComponentInChildren<Camera> ().enabled = false;
 			return;
 		}
-        if (deathByFalling())
-        {
-            return;
-        }
+		if (deathByFalling ()) {
+			return;
+		}
 		rotateHorizontally ();
 		CmdRotateVertically ();
 		if (Utilities.isXboxController ()) {
