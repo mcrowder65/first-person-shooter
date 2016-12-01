@@ -26,7 +26,11 @@ public class Health : NetworkBehaviour
 			RpcRespawn ();
 		}
 	}
-
+    public void deathByFalling()
+    {
+        currentHealth = Constants.MAX_HEALTH;
+        transform.position = Utilities.getNewRespawnPoint();
+    }
 	void OnChangeHealth (int currentHealth)
 	{
 		healthBar.sizeDelta = new Vector2 (currentHealth, healthBar.sizeDelta.y);
@@ -36,7 +40,6 @@ public class Health : NetworkBehaviour
 	void RpcRespawn ()
 	{
 		if (isLocalPlayer) {
-			// move back to zero location
 			transform.position = Utilities.getNewRespawnPoint ();
 		}
 	}

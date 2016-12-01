@@ -11,7 +11,6 @@ public abstract class PlayerController : NetworkBehaviour
 	private float yaw = -1f;
 	public float speedV = 2.0f;
 	private float pitch = -1f;
-
 	public GameObject bulletPrefab;
 	public Transform bulletSpawn;
 	// Use this for initialization
@@ -95,7 +94,7 @@ public abstract class PlayerController : NetworkBehaviour
     bool deathByFalling()
     {
         //TODO death! -1 on scoreboard?
-
+        
         return transform.position.y <= -5f;
     }
 	//public abstract void CmdFire();
@@ -128,9 +127,11 @@ public abstract class PlayerController : NetworkBehaviour
 		}
         if (deathByFalling())
         {
-            transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
             var health = GetComponent<Health>();
-            health.TakeDamage(Constants.MAX_HEALTH);
+            health.deathByFalling();
+            var canvas = transform.Find("Canvas");
+            var scoreboard = canvas.Find("Scoreboard");
+            scoreboard.GetComponent<UnityEngine.UI.Text>().text = "dead!";
             return;
         }
             
