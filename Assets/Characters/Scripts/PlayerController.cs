@@ -32,7 +32,7 @@ public abstract class PlayerController : NetworkBehaviour
 		Physics.gravity = new Vector3 (0, -50, 0);
 
         //TODO: THIS IS TEMPORARY
-        GameObject weapon = (GameObject) Instantiate(FlamethrowerPrefab, this.transform, false);
+        GameObject weapon = (GameObject) Instantiate(SubmachinegunPrefab, this.transform, false);
         currentWeapon = weapon.GetComponent<Weapon>();
 	}
    
