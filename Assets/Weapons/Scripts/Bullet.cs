@@ -4,13 +4,11 @@ using System.Collections;
 public class Bullet : Projectile
 {
 
-    public AudioSource firingSound;
-
+  
 	// Use this for initialization
 	void Start ()
 	{
-        if (firingSound != null)
-            firingSound.Play();   
+       
 	}
 	
 	void OnCollisionEnter (Collision collision)

@@ -6,7 +6,7 @@ public class Flamethrower : Weapon {
 
 
     public GameObject flamePrefab;
-
+    
     public override Projectile CreateProjectile(Transform crosshair)
     {
       //  Vector3 pos;
