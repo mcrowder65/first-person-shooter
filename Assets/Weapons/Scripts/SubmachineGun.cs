@@ -18,6 +18,8 @@ public class SubmachineGun : Weapon {
         bullet.GetComponent<Bullet>().owner = transform.parent.GetComponent<PlayerController>();
         Debug.Assert(bullet.GetComponent<Bullet>().owner != null);
 
+        GetComponent<AudioSource>().Play();
+
         RaiseShotFired();
 
         return bullet.GetComponent<Bullet>();
