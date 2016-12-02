@@ -25,14 +25,21 @@ public abstract class PlayerController : NetworkBehaviour
     private GenericTimer jumpCooldownTimer = new GenericTimer(0.5f, false);
     private bool jumpIsCoolingDown = false;
 
+
+    
+
+
 	// Use this for initialization
 	public void Start ()
 	{
 		updateScoreboard ();
 		Physics.gravity = new Vector3 (0, -50, 0);
 
+        GetComponentInChildren<AudioListener>().enabled = isLocalPlayer;
+        
+
         //TODO: THIS IS TEMPORARY
-        GameObject weapon = (GameObject) Instantiate(SubmachinegunPrefab, this.transform, false);
+        GameObject weapon = (GameObject) Instantiate(FlamethrowerPrefab, this.transform, false);
         currentWeapon = weapon.GetComponent<Weapon>();
 	}
    
