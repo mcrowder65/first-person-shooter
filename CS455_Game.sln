@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS455_Game.CSharp.Plugins",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS455_Game.CSharp", "CS455_Game.CSharp.csproj", "{4BFDA155-3667-6A07-452E-3F0A58A747F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS455_Game.CSharp.Editor", "CS455_Game.CSharp.Editor.csproj", "{2224C9BB-8AC4-0633-4659-423B0C7F24D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{4BFDA155-3667-6A07-452E-3F0A58A747F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BFDA155-3667-6A07-452E-3F0A58A747F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BFDA155-3667-6A07-452E-3F0A58A747F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2224C9BB-8AC4-0633-4659-423B0C7F24D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2224C9BB-8AC4-0633-4659-423B0C7F24D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2224C9BB-8AC4-0633-4659-423B0C7F24D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2224C9BB-8AC4-0633-4659-423B0C7F24D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
