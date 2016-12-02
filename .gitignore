@@ -1,37 +1,37 @@
 
 *.csproj
 *.mtl
-Library/assetDatabase3
+#Library/assetDatabase3
 
-Library/AssetImportState
+#Library/AssetImportState
 
-Library/AssetServerCacheV3
+#Library/AssetServerCacheV3
 
-Library/EditorUserBuildSettings.asset
-Library/metadata
-Library/ShaderCache
-*.meta
-Library/shadercompiler-UnityShaderCompiler0.log
-*.backup
-*.bakert
-Library/UnityTempFile*
+#Library/EditorUserBuildSettings.asset
+#Library/metadata
+#Library/ShaderCache
+#*.meta
+#Library/shadercompiler-UnityShaderCompiler0.log
+#*.backup
+#*.bakert
+#Library/UnityTempFile*
 
-*.aspx
-fps.app/*
-*.stamp
+#*.aspx
+#fps.app/*
+#*.stamp
 
-*.dwlt
+#*.dwlt
 
-*.log
+#*.log
 
-*.txt
+#*.txt
 
 
-*.stamp
+#*.stamp
 
-*.dll
+#*.dll
 
-*.mdb
-Temp/*
-Untitled.app/*
-Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
+#*.mdb
+#Temp/*
+#Untitled.app/*
+#Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
