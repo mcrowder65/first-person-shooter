@@ -44,6 +44,7 @@ static class Utilities
             default:
                 throw new UnityException("Unimplemented current scene.");
         }
+       
     }
 
     public static float GetDeathY(SceneEnum currentScene)

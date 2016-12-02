@@ -17,7 +17,7 @@ public class Bullet : Projectile
 
         if (!IsHittable(hit))
             return;
-
+       
 
 
 		var health = hit.GetComponent<Health> ();
