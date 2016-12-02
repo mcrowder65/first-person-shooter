@@ -14,11 +14,12 @@ public class Bullet : Projectile
 	void OnCollisionEnter (Collision collision)
 	{
 		var hit = collision.gameObject;
-       
-		if (hit.ToString () == "Bullet(Clone) (UnityEngine.GameObject)") {
-			return;
-		}
-		// TODO if hit is the object shooting it, or hit is another bullet, do nothing.
+
+        if (!IsHittable(hit))
+            return;
+
+
+
 		var health = hit.GetComponent<Health> ();
 		if (health != null) {
 			

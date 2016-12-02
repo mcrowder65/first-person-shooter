@@ -79,6 +79,7 @@
     <Compile Include="Assets\Constants.cs" />
     <Compile Include="Assets\GameController.cs" />
     <Compile Include="Assets\GenericTimer.cs" />
+    <Compile Include="Assets\ParticleColliderNotifier.cs" />
     <Compile Include="Assets\PyroParticles\Demo\DemoScript.cs" />
     <Compile Include="Assets\PyroParticles\Demo\DemoScriptEditor.cs" />
     <Compile Include="Assets\PyroParticles\Prefab\Script\FireBaseScript.cs" />
@@ -91,6 +92,8 @@
     <Compile Include="Assets\StartMenu.cs" />
     <Compile Include="Assets\Utilities.cs" />
     <Compile Include="Assets\Weapons\Scripts\Bullet.cs" />
+    <Compile Include="Assets\Weapons\Scripts\Flame.cs" />
+    <Compile Include="Assets\Weapons\Scripts\Flamethrower.cs" />
     <Compile Include="Assets\Weapons\Scripts\Projectile.cs" />
     <Compile Include="Assets\Weapons\Scripts\SubmachineGun.cs" />
     <Compile Include="Assets\Weapons\Scripts\Weapon.cs" />

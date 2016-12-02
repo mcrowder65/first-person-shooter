@@ -27,4 +27,10 @@ public abstract class Projectile : MonoBehaviour {
         get { throw new UnityException("Lifespan was not overridden."); }
     }
 
+ 
+    protected bool IsHittable(GameObject hit)
+    {
+        return hit.GetComponent<Projectile>() == null;
+    }
+
 }
