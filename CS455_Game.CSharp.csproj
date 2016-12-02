@@ -71,15 +71,15 @@
   <ItemGroup>
     <Compile Include="Assets\Billboard.cs" />
     <Compile Include="Assets\Bullet.cs" />
-    <Compile Include="Assets\CharacterEnum.cs" />
-    <Compile Include="Assets\CharacterTools.cs" />
     <Compile Include="Assets\Characters\Scripts\BaymaxController.cs" />
+    <Compile Include="Assets\Characters\Scripts\CharacterEnum.cs" />
+    <Compile Include="Assets\Characters\Scripts\CharacterTools.cs" />
+    <Compile Include="Assets\Characters\Scripts\Health.cs" />
+    <Compile Include="Assets\Characters\Scripts\PlayerController.cs" />
     <Compile Include="Assets\ChoosePlayer.cs" />
     <Compile Include="Assets\Constants.cs" />
     <Compile Include="Assets\GameController.cs" />
     <Compile Include="Assets\GenericTimer.cs" />
-    <Compile Include="Assets\Health.cs" />
-    <Compile Include="Assets\PlayerController.cs" />
     <Compile Include="Assets\StartMenu.cs" />
     <Compile Include="Assets\Utilities.cs" />
   </ItemGroup>
