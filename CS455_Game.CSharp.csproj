@@ -92,6 +92,7 @@
     <Compile Include="Assets\Utilities.cs" />
     <Compile Include="Assets\Weapons\Scripts\Bullet.cs" />
     <Compile Include="Assets\Weapons\Scripts\Projectile.cs" />
+    <Compile Include="Assets\Weapons\Scripts\SubmachineGun.cs" />
     <Compile Include="Assets\Weapons\Scripts\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
