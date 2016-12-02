@@ -69,11 +69,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\BaymaxController.cs" />
     <Compile Include="Assets\Billboard.cs" />
     <Compile Include="Assets\Bullet.cs" />
     <Compile Include="Assets\CharacterEnum.cs" />
     <Compile Include="Assets\CharacterTools.cs" />
+    <Compile Include="Assets\Characters\Scripts\BaymaxController.cs" />
     <Compile Include="Assets\ChoosePlayer.cs" />
     <Compile Include="Assets\Constants.cs" />
     <Compile Include="Assets\GameController.cs" />
