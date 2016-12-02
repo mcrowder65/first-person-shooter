@@ -59,7 +59,7 @@ public abstract class PlayerController : NetworkBehaviour
 		Camera cam = GetComponentInChildren<Camera> ();
         //TODO: Generalize to work with any type of gun
 		var gun = transform.Find ("SubmachineGun");
-		if (currentWeapon.pitch == -1f) {
+		if (currentWeapon.pitch == Constants.INVALID_PITCH) {
             currentWeapon.pitch = cam.transform.eulerAngles.x;
 		}
         currentWeapon.pitch -= speedV * Input.GetAxis (Utilities.isXboxController () ? "Right joystick vertical" : "Mouse Y");
@@ -67,7 +67,7 @@ public abstract class PlayerController : NetworkBehaviour
 		cam.transform.eulerAngles = new Vector3 (currentWeapon.pitch, cam.transform.eulerAngles.y, 0.0f);
 		gun.transform.eulerAngles = new Vector3 (gun.transform.eulerAngles.x, gun.transform.eulerAngles.y, currentWeapon.pitch);
         // Clamp pitch:
-        currentWeapon.pitch = Mathf.Clamp (currentWeapon.pitch, -90f, 90f);
+        currentWeapon.pitch = Mathf.Clamp (currentWeapon.pitch, -70f, 70f);
 
 		cam.transform.eulerAngles = new Vector3 (currentWeapon.pitch, cam.transform.eulerAngles.y, 0f);
 		gun.transform.eulerAngles = new Vector3 (gun.transform.eulerAngles.x, gun.transform.eulerAngles.y, currentWeapon.pitch);

@@ -5,7 +5,7 @@ using System;
 public abstract class Weapon : MonoBehaviour {
 
 
-    public float pitch = -1f;
+    public float pitch = Constants.INVALID_PITCH;
 
     public GenericTimer cooldownTimer;
 
