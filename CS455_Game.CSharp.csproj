@@ -70,7 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Billboard.cs" />
-    <Compile Include="Assets\Bullet.cs" />
     <Compile Include="Assets\Characters\Scripts\BaymaxController.cs" />
     <Compile Include="Assets\Characters\Scripts\CharacterEnum.cs" />
     <Compile Include="Assets\Characters\Scripts\CharacterTools.cs" />
@@ -82,6 +81,7 @@
     <Compile Include="Assets\GenericTimer.cs" />
     <Compile Include="Assets\StartMenu.cs" />
     <Compile Include="Assets\Utilities.cs" />
+    <Compile Include="Assets\Weapons\Scripts\Bullet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\1nfern0\SubmachineGun\submachinegunshader.shader" />
