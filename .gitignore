@@ -9,7 +9,6 @@ Library/AssetServerCacheV3
 
 Library/EditorUserBuildSettings.asset
 Library/metadata
-Library/ScriptMapper
 Library/ShaderCache
 *.meta
 Library/shadercompiler-UnityShaderCompiler0.log
@@ -27,7 +26,6 @@ fps.app/*
 
 *.txt
 
-*.asset
 
 *.stamp
 
