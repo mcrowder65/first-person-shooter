@@ -17,6 +17,9 @@ public class SubmachineGun : Weapon {
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 100;
         bullet.GetComponent<Bullet>().owner = transform.parent.GetComponent<PlayerController>();
         Debug.Assert(bullet.GetComponent<Bullet>().owner != null);
+
+        RaiseShotFired();
+
         return bullet.GetComponent<Bullet>();
     }
 
@@ -24,9 +27,13 @@ public class SubmachineGun : Weapon {
     void Start () {
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+
+    public override float CooldownPeriod
+    {
+        get
+        {
+            return 0.2f;
+        }
+    }
 }

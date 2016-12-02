@@ -125,6 +125,9 @@ public abstract class PlayerController : NetworkBehaviour
 	[Command]
 	public void CmdFire ()
 	{
+        if (!currentWeapon.CanFire)
+            return;
+
 		var canvas = transform.Find ("Canvas");
 		var crossHair = canvas.Find ("Crosshair");
         // Create the Bullet from the Bullet Prefab
