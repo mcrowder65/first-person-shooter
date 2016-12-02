@@ -75,6 +75,9 @@
     <Compile Include="Assets\CharacterEnum.cs" />
     <Compile Include="Assets\CharacterTools.cs" />
     <Compile Include="Assets\ChoosePlayer.cs" />
+    <Compile Include="Assets\Constants.cs" />
+    <Compile Include="Assets\GameController.cs" />
+    <Compile Include="Assets\GenericTimer.cs" />
     <Compile Include="Assets\Health.cs" />
     <Compile Include="Assets\PlayerController.cs" />
     <Compile Include="Assets\StartMenu.cs" />

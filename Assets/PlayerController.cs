@@ -14,12 +14,17 @@ public abstract class PlayerController : NetworkBehaviour
 	private float pitch = -1f;
 	public GameObject bulletPrefab;
 	public Transform bulletSpawn;
+
+    private GenericTimer jumpCooldownTimer = new GenericTimer(0.5f, false);
+    private bool jumpIsCoolingDown = false;
+
 	// Use this for initialization
 	public void Start ()
 	{
 		updateScoreboard ();
 		Physics.gravity = new Vector3 (0, -50, 0);
 	}
+   
 
 	public override void OnStartLocalPlayer ()
 	{
@@ -82,8 +87,10 @@ public abstract class PlayerController : NetworkBehaviour
 
 	void jump ()
 	{
-		if (IsOnGround ()) {
+		if (!jumpIsCoolingDown && IsOnGround ()) {
 			GetComponent<Rigidbody> ().AddForce (Vector3.up * Constants.JUMP_FORCE);
+            jumpCooldownTimer.Enabled = true;
+            jumpIsCoolingDown = true;
 		}
 	}
 
@@ -178,9 +185,14 @@ public abstract class PlayerController : NetworkBehaviour
 			}
 		}
 
+        if (jumpCooldownTimer.IncrementIfEnabled())
+        {
+            jumpCooldownTimer.Enabled = false;
+            jumpCooldownTimer.Reset();
+            jumpIsCoolingDown = false;
+        }
 
 
-
-	}
+    }
 
 }
