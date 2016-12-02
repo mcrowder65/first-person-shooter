@@ -32,4 +32,30 @@ static class Utilities
 		int randomIndex = rand.Next (min, max);
 		return sceneName == "Lockout" ? lockoutSpawnPositions [randomIndex] : hearthSpawnPositions [randomIndex];
 	}
+
+    public static SceneEnum GetCurrentScene()
+    {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Lockout":
+                return SceneEnum.Lockout;
+            case "Hearth":
+                return SceneEnum.Hearth;
+            default:
+                throw new UnityException("Unimplemented current scene.");
+        }
+    }
+
+    public static float GetDeathY(SceneEnum currentScene)
+    {
+        switch (currentScene)
+        {
+            case SceneEnum.Lockout:
+                return Constants.LOCKOUT_DEATH_Y;
+            case SceneEnum.Hearth:
+                return Constants.HEARTH_DEATH_Y;
+            default:
+                throw new UnityException("Unimplemented death y.");
+        }
+    }
 }

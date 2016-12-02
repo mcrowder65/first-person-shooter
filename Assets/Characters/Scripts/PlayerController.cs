@@ -121,7 +121,7 @@ public abstract class PlayerController : NetworkBehaviour
 
 	bool deathByFalling ()
 	{
-		if (transform.position.y > Constants.DEATH_Y) {
+		if (transform.position.y > Utilities.GetDeathY(Utilities.GetCurrentScene())) {
 			return false;
 		}
 		var health = GetComponent<Health> ();

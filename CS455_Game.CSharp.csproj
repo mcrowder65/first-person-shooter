@@ -89,6 +89,7 @@
     <Compile Include="Assets\PyroParticles\Prefab\Script\FireProjectileScript.cs" />
     <Compile Include="Assets\PyroParticles\Prefab\Script\MeteorSwarmScript.cs" />
     <Compile Include="Assets\PyroParticles\Prefab\Script\SingleLineAttribute.cs" />
+    <Compile Include="Assets\SceneEnum.cs" />
     <Compile Include="Assets\StartMenu.cs" />
     <Compile Include="Assets\Utilities.cs" />
     <Compile Include="Assets\Weapons\Scripts\Bullet.cs" />
