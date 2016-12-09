@@ -24,7 +24,7 @@ public class Flame : Projectile {
         if (health != null)
         {
 
-            health.TakeDamage(2, owner.transform);
+            health.TakeDamage(3, owner.transform);
         }
       
     }

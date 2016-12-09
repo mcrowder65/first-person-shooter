@@ -13,11 +13,15 @@ public class SubmachineGun : Weapon {
                          bulletPrefab,
                          crosshair.position,
                          Quaternion.Euler(transform.parent.rotation.eulerAngles.x + pitch, transform.parent.rotation.eulerAngles.y - 90, transform.parent.rotation.eulerAngles.z),
-                         transform);
+                         null);
+
+    
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 100;
         bullet.GetComponent<Bullet>().owner = transform.parent.GetComponent<PlayerController>();
         Debug.Assert(bullet.GetComponent<Bullet>().owner != null);
 
+
+        bullet.transform.Rotate(Vector3.up, 90);
         GetComponent<AudioSource>().Play();
 
         RaiseShotFired();
@@ -35,7 +39,7 @@ public class SubmachineGun : Weapon {
     {
         get
         {
-            return 0.2f;
+            return 0.1f;
         }
     }
 }
