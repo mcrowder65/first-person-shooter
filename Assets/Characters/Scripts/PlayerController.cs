@@ -137,7 +137,14 @@ public abstract class PlayerController : NetworkBehaviour
 
 	bool IsOnGround ()
 	{
-		float raycastDistance = GetComponent<Collider> ().bounds.extents.y + 0.4f;
+        Collider lowestCollider = null;
+        float lowY = float.MaxValue;
+        foreach (var collider in GetComponentsInChildren<Collider>())
+        {
+            if (collider.transform.position.y < lowY) { lowY = collider.transform.position.y;  lowestCollider = collider; }
+        }
+
+		float raycastDistance = lowestCollider.bounds.extents.y + 0.8f;
 		return Physics.Raycast (transform.position, -Vector3.up, raycastDistance);
 	}
 
