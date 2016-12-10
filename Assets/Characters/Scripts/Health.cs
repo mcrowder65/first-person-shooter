@@ -61,7 +61,7 @@ public class Health : NetworkBehaviour
 		if (isLocalPlayer) {
             Respawn newRespawn = Utilities.getNewRespawnPoint();
             newRespawn.setRespawn(transform);
-            
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
             currentHealth = Constants.MAX_HEALTH;
 		}
 	}

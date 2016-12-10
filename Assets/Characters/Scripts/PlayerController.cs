@@ -256,11 +256,7 @@ public abstract class PlayerController : NetworkBehaviour
 			}
             if (Input.GetKey(KeyCode.R))
             {
-                if (!Dead)
-                {
-                    Dead = true;
-                    GetComponentInChildren<Killcam>().BeginKillcam(this.gameObject);
-                }
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
 		}
 
