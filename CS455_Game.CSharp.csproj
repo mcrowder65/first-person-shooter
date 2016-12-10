@@ -73,12 +73,14 @@
     <Compile Include="Assets\Characters\Scripts\BaymaxController.cs" />
     <Compile Include="Assets\Characters\Scripts\CharacterEnum.cs" />
     <Compile Include="Assets\Characters\Scripts\CharacterTools.cs" />
+    <Compile Include="Assets\Characters\Scripts\GameAnimator.cs" />
     <Compile Include="Assets\Characters\Scripts\Health.cs" />
     <Compile Include="Assets\Characters\Scripts\PlayerController.cs" />
     <Compile Include="Assets\ChoosePlayer.cs" />
     <Compile Include="Assets\Constants.cs" />
     <Compile Include="Assets\GameController.cs" />
     <Compile Include="Assets\GenericTimer.cs" />
+    <Compile Include="Assets\Killcam.cs" />
     <Compile Include="Assets\ParticleColliderNotifier.cs" />
     <Compile Include="Assets\PyroParticles\Demo\DemoScript.cs" />
     <Compile Include="Assets\PyroParticles\Demo\DemoScriptEditor.cs" />
@@ -89,8 +91,10 @@
     <Compile Include="Assets\PyroParticles\Prefab\Script\FireProjectileScript.cs" />
     <Compile Include="Assets\PyroParticles\Prefab\Script\MeteorSwarmScript.cs" />
     <Compile Include="Assets\PyroParticles\Prefab\Script\SingleLineAttribute.cs" />
+    <Compile Include="Assets\ResetAlive.cs" />
     <Compile Include="Assets\SceneEnum.cs" />
     <Compile Include="Assets\StartMenu.cs" />
+    <Compile Include="Assets\StayDead.cs" />
     <Compile Include="Assets\Utilities.cs" />
     <Compile Include="Assets\Weapons\Scripts\Bullet.cs" />
     <Compile Include="Assets\Weapons\Scripts\Flame.cs" />

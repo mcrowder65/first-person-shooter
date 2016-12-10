@@ -26,7 +26,15 @@ public abstract class PlayerController : NetworkBehaviour
     private bool jumpIsCoolingDown = false;
 
 
-    
+    private bool _dead = false;
+    public bool Dead
+    {
+        get { return _dead; }
+        protected set
+        {
+            _dead = value;
+        }
+    }
 
 
 	// Use this for initialization
@@ -36,35 +44,45 @@ public abstract class PlayerController : NetworkBehaviour
 		Physics.gravity = new Vector3 (0, -50, 0);
 
         GetComponentInChildren<AudioListener>().enabled = isLocalPlayer;
-        
 
+        GetComponentInChildren<Killcam>().EndKillcam += PlayerController_EndKillcam;
         //TODO: THIS IS TEMPORARY
         GameObject weapon = (GameObject) Instantiate(SubmachinegunPrefab, this.transform, false);
         currentWeapon = weapon.GetComponent<Weapon>();
 	}
-   
 
-	public override void OnStartLocalPlayer ()
+    private void PlayerController_EndKillcam()
+    {
+        Dead = false;
+        GetComponent<Health>().RpcRespawn();
+    }
+
+    public override void OnStartLocalPlayer ()
 	{
 		transform.position = Utilities.getNewRespawnPoint ();
 	}
 
 	void moveForwardsOrBackwards (float val)
 	{
-		Vector3 vect = new Vector3 (val, 0, 0);
+        if (Dead) return;
+
+        Vector3 vect = new Vector3 (val, 0, 0);
 		transform.Translate (vect * moveSpeed * Time.deltaTime);
 	}
 
 	void moveLeftOrRight (float val)
 	{
-		Vector3 vect = new Vector3 (0, 0, val);
+        if (Dead) return;
+
+        Vector3 vect = new Vector3 (0, 0, val);
 		transform.Translate (vect * moveSpeed * Time.deltaTime);
 	}
 
 	void CmdRotateVertically ()
 	{
+        if (Dead) return;
 
-		Camera cam = GetComponentInChildren<Camera> ();
+        Camera cam = GetComponentInChildren<Camera> ();
         //TODO: Generalize to work with any type of gun
 		var gun = transform.Find ("SubmachineGun");
 		if (currentWeapon.pitch == Constants.INVALID_PITCH) {
@@ -84,7 +102,9 @@ public abstract class PlayerController : NetworkBehaviour
    
 	void rotateHorizontally ()
 	{
-		if (yaw == -1f) {
+        if (Dead) return;
+
+        if (yaw == -1f) {
 			yaw = transform.eulerAngles.y;
 		}
 
@@ -106,7 +126,9 @@ public abstract class PlayerController : NetworkBehaviour
 
 	void jump ()
 	{
-		if (!jumpIsCoolingDown && IsOnGround ()) {
+        if (Dead) return;
+
+        if (!jumpIsCoolingDown && IsOnGround ()) {
 			GetComponent<Rigidbody> ().AddForce (Vector3.up * Constants.JUMP_FORCE);
             jumpCooldownTimer.Enabled = true;
             jumpIsCoolingDown = true;
@@ -133,6 +155,8 @@ public abstract class PlayerController : NetworkBehaviour
 	[Command]
 	public void CmdFire ()
 	{
+        if (Dead) return;
+
         if (!currentWeapon.CanFire)
             return;
 
@@ -169,6 +193,15 @@ public abstract class PlayerController : NetworkBehaviour
 		scoreboard.GetComponent<UnityEngine.UI.Text> ().text = "Kills: " + health.kills + " Deaths: " + health.deaths;
 	}
 
+    public void Death()
+    {
+        if (!Dead)
+        {
+            Dead = true;
+            GetComponentInChildren<Killcam>().BeginKillcam(this.gameObject);
+            GetComponent<GameAnimator>().DoFallAnimation();
+        }
+    }
 	void Update ()
 	{
 
@@ -213,6 +246,14 @@ public abstract class PlayerController : NetworkBehaviour
 			if (Input.GetKey (KeyCode.Mouse0)) {
 				CmdFire ();
 			}
+            if (Input.GetKey(KeyCode.R))
+            {
+                if (!Dead)
+                {
+                    Dead = true;
+                    GetComponentInChildren<Killcam>().BeginKillcam(this.gameObject);
+                }
+            }
 		}
 
         if (jumpCooldownTimer.IncrementIfEnabled())

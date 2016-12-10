@@ -19,27 +19,36 @@ public class Health : NetworkBehaviour
 		if (!isServer)
 			return;
 
-		currentHealth -= amount;
-		if (currentHealth <= 0) {
-			currentHealth = Constants.MAX_HEALTH;
-			deaths++;
-			Debug.Log (firer.GetComponent < Health> ().kills);
-			
-			firer.GetComponent<Health> ().kills++;
-			firer.GetComponent<PlayerController> ().updateScoreboard ();
-			GetComponentInParent<PlayerController> ().updateScoreboard ();
-			// called on the Server, but invoked on the Clients
-			RpcRespawn ();
-		}
+        if (!GetComponentInParent<PlayerController>().Dead)
+        {
+            currentHealth -= amount;
+            if (currentHealth <= 0)
+            {
+                currentHealth = Constants.MAX_HEALTH;
+                deaths++;
+                Debug.Log(firer.GetComponent<Health>().kills);
+
+                firer.GetComponent<Health>().kills++;
+                firer.GetComponent<PlayerController>().updateScoreboard();
+                GetComponentInParent<PlayerController>().updateScoreboard();
+                // called on the Server, but invoked on the Clients
+                //RpcRespawn ();
+                GetComponentInParent<PlayerController>().Death();
+            }
+        }
 	}
 
 	public void deathByFalling ()
 	{
-		currentHealth = Constants.MAX_HEALTH;
-		transform.position = Utilities.getNewRespawnPoint ();
-		deaths++;
-		kills--;
-	}
+        if (!GetComponentInParent<PlayerController>().Dead)
+        {
+            currentHealth = 0;
+            //transform.position = Utilities.getNewRespawnPoint ();
+            deaths++;
+            kills--;
+            GetComponentInParent<PlayerController>().Death();
+        }
+    }
 
 	void OnChangeHealth (int currentHealth)
 	{
@@ -47,10 +56,12 @@ public class Health : NetworkBehaviour
 	}
 
 	[ClientRpc]
-	void RpcRespawn ()
+	public void RpcRespawn ()
 	{
 		if (isLocalPlayer) {
 			transform.position = Utilities.getNewRespawnPoint ();
+            transform.eulerAngles = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
+            currentHealth = Constants.MAX_HEALTH;
 		}
 	}
 }
