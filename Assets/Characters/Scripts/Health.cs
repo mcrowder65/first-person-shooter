@@ -59,8 +59,9 @@ public class Health : NetworkBehaviour
 	public void RpcRespawn ()
 	{
 		if (isLocalPlayer) {
-			transform.position = Utilities.getNewRespawnPoint ();
-            transform.eulerAngles = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
+            Respawn newRespawn = Utilities.getNewRespawnPoint();
+            newRespawn.setRespawn(transform);
+            
             currentHealth = Constants.MAX_HEALTH;
 		}
 	}
