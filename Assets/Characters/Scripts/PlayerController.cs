@@ -49,7 +49,16 @@ public abstract class PlayerController : NetworkBehaviour
         //TODO: THIS IS TEMPORARY
         GameObject weapon = (GameObject) Instantiate(SubmachinegunPrefab, this.transform, false);
         currentWeapon = weapon.GetComponent<Weapon>();
-	}
+
+        if (isServer)
+        {
+            transform.gameObject.tag = "server";
+        }
+        else
+        {
+            transform.gameObject.tag = "client";
+        }
+    }
 
     private void PlayerController_EndKillcam()
     {
@@ -59,6 +68,7 @@ public abstract class PlayerController : NetworkBehaviour
 
     public override void OnStartLocalPlayer ()
 	{
+        
         Respawn newRespawn = Utilities.getNewRespawnPoint();
         newRespawn.setRespawn(transform);
     }
@@ -159,16 +169,28 @@ public abstract class PlayerController : NetworkBehaviour
 		updateScoreboard ();
 		return true;
 	}
-
-	[Command]
-	public void CmdFire ()
+    [Command]
+	public void CmdFire (bool server)
 	{
         if (Dead) return;
 
         if (!currentWeapon.CanFire)
             return;
+        Transform tranny;
+        if (server)
+        {
+            GameObject obj = GameObject.FindGameObjectWithTag("server");
 
-		var canvas = transform.Find ("Canvas");
+
+            GameObject client = GameObject.FindGameObjectWithTag("client");
+            tranny = obj.transform;
+        }
+        else
+        {
+
+            tranny = transform;
+        }
+        var canvas = tranny.Find ("Canvas");
 		var crossHair = canvas.Find ("Crosshair");
         // Create the Bullet from the Bullet Prefab
 
@@ -212,7 +234,7 @@ public abstract class PlayerController : NetworkBehaviour
     }
 	void Update ()
 	{
-
+        Debug.Log(transform.gameObject.tag);
 		if (!isLocalPlayer) {
 			GetComponentInChildren<Camera> ().enabled = false;
 			return;
@@ -233,7 +255,7 @@ public abstract class PlayerController : NetworkBehaviour
 			if (triggerInput > 0) { //left trigger
 				Debug.Log ("Grenade!!!");
 			} else if (triggerInput < 0) { //right trigger
-				CmdFire ();
+				CmdFire (isServer);
 			}
 		} else {
 			if (Input.GetKey (KeyCode.A)) {
@@ -252,7 +274,15 @@ public abstract class PlayerController : NetworkBehaviour
 				jump ();
 			}
 			if (Input.GetKey (KeyCode.Mouse0)) {
-				CmdFire ();
+                if (isServer)
+                {
+                    transform.gameObject.tag = "server";
+                }
+                else
+                {
+                    transform.gameObject.tag = "client";
+                }
+                CmdFire (isServer);
 			}
             if (Input.GetKey(KeyCode.R))
             {
