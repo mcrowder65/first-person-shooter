@@ -59,8 +59,9 @@ public abstract class PlayerController : NetworkBehaviour
 
     public override void OnStartLocalPlayer ()
 	{
-		transform.position = Utilities.getNewRespawnPoint ();
-	}
+        Respawn newRespawn = Utilities.getNewRespawnPoint();
+        newRespawn.setRespawn(transform);
+    }
 
 	void moveForwardsOrBackwards (float val)
 	{
