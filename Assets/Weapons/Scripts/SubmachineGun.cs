@@ -12,7 +12,8 @@ public class SubmachineGun : Weapon {
         var bullet = (GameObject)Instantiate(
                          bulletPrefab,
                          crosshair.position,
-                         Quaternion.Euler(transform.parent.rotation.eulerAngles.x + pitch, transform.parent.rotation.eulerAngles.y - 90, transform.parent.rotation.eulerAngles.z),
+                         crosshair.rotation,
+                         //Quaternion.Euler(transform.parent.rotation.eulerAngles.x + pitch, transform.parent.rotation.eulerAngles.y - 90, transform.parent.rotation.eulerAngles.z),
                          null);
 
     
@@ -20,8 +21,8 @@ public class SubmachineGun : Weapon {
         bullet.GetComponent<Bullet>().owner = transform.parent.GetComponent<PlayerController>();
         Debug.Assert(bullet.GetComponent<Bullet>().owner != null);
 
-
-        bullet.transform.Rotate(Vector3.up, 90);
+        //TODO figure out how to rotate bullet correctly on client and server.
+        //bullet.transform.Rotate(Vector3.up, 90);
         GetComponent<AudioSource>().Play();
 
         RaiseShotFired();
