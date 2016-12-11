@@ -14,11 +14,14 @@ public class Respawn {
         this.cameraRotation = cameraRotation;
         this.gunRotation = gunRotation;
     }
-    public void setRespawn(Transform transform)
+    public void setRespawn(GameObject player, GameObject camera, GameObject gun)
     {
-        transform.position = position;
-        var gun = transform.Find("SubmachineGun"); //TODO this needs to be anything rather than just submachine gun.
-        var camera = transform.Find("Camera");
+        player.transform.position = position;
+        player.transform.eulerAngles = playerRotation;
+        camera.transform.eulerAngles = cameraRotation;
+        gun.transform.eulerAngles = gunRotation;
+      //  var gun = transform.Find("SubmachineGun"); //TODO this needs to be anything rather than just submachine gun.
+       // var camera = transform.Find("Camera");
         //TODO set rotation here.
         //transform.eulerAngles = playerRotation;
         //camera.transform.eulerAngles = cameraRotation;

@@ -73,9 +73,15 @@ public class Health : NetworkBehaviour
 	{
 		if (isLocalPlayer) {
             Respawn newRespawn = Utilities.getNewRespawnPoint();
-            newRespawn.setRespawn(transform);
+            var cam = GetComponentInChildren<Camera>();
+            Debug.Log(cam != null);
+            var gun = GetComponent<PlayerController>().currentWeapon;
+            Debug.Log(gun != null);
+
+            newRespawn.setRespawn(gameObject, cam.gameObject, gun.gameObject);
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             currentHealth = Constants.MAX_HEALTH;
-		}
-	}
+
+        }
+    }
 }

@@ -48,8 +48,24 @@ public abstract class PlayerController : NetworkBehaviour
         //TODO: THIS IS TEMPORARY
         GameObject weapon = (GameObject) Instantiate(SubmachinegunPrefab, this.transform, false);
         currentWeapon = weapon.GetComponent<Weapon>();
+
+
+        if (isLocalPlayer)
+        {
+            Respawn newRespawn = Utilities.getNewRespawnPoint();
+
+            var cam = GetComponentInChildren<Camera>();
+            Debug.Assert(cam != null);
+            var gun = currentWeapon;
+            Debug.Assert(gun != null);
+
+            newRespawn.setRespawn(gameObject, cam.gameObject, gun.gameObject);
+        }
+
+
+
     }
-    
+
     private void PlayerController_EndKillcam()
     {
         Dead = false;
@@ -59,8 +75,7 @@ public abstract class PlayerController : NetworkBehaviour
     public override void OnStartLocalPlayer ()
 	{
         
-        Respawn newRespawn = Utilities.getNewRespawnPoint();
-        newRespawn.setRespawn(transform);
+    
     }
 
 	void moveForwardsOrBackwards (float val)
