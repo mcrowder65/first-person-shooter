@@ -30,7 +30,7 @@ public class Health : NetworkBehaviour
                 currentHealth = Constants.MAX_HEALTH;
                 ++deaths;
 
-                //firer.GetComponent<Health>().kills++;
+                firer.GetComponent<Health>().kills++;
                 GetComponentInParent<PlayerController>().Death();
             }
         }
