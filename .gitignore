@@ -3,7 +3,7 @@
 *.mtl
 Builds/*
 #Library/assetDatabase3
-
+Temp/*
 #Library/AssetImportState
 
 #Library/AssetServerCacheV3

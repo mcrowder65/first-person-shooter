@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "first-person-shooter.CSharp.Plugins", "first-person-shooter.CSharp.Plugins.csproj", "{B7E814B1-E8B3-46D0-F5C4-8C8A22E02FEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "first-person-shooter.CSharp", "first-person-shooter.CSharp.csproj", "{2C0063A1-A9D9-4768-76ED-20FA8CB27D9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "first-person-shooter.CSharp.Editor", "first-person-shooter.CSharp.Editor.csproj", "{865BF330-2B60-4C77-82A6-82510E146D4D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7E814B1-E8B3-46D0-F5C4-8C8A22E02FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7E814B1-E8B3-46D0-F5C4-8C8A22E02FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7E814B1-E8B3-46D0-F5C4-8C8A22E02FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7E814B1-E8B3-46D0-F5C4-8C8A22E02FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C0063A1-A9D9-4768-76ED-20FA8CB27D9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C0063A1-A9D9-4768-76ED-20FA8CB27D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C0063A1-A9D9-4768-76ED-20FA8CB27D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C0063A1-A9D9-4768-76ED-20FA8CB27D9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{865BF330-2B60-4C77-82A6-82510E146D4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{865BF330-2B60-4C77-82A6-82510E146D4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{865BF330-2B60-4C77-82A6-82510E146D4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{865BF330-2B60-4C77-82A6-82510E146D4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

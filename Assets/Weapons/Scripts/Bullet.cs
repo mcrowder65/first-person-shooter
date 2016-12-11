@@ -22,7 +22,7 @@ public class Bullet : Projectile
 
 		var health = hit.GetComponent<Health> ();
 		if (health != null) {
-			
+            Debug.Assert(owner != null);
 			health.TakeDamage (5, owner.transform);
 		}
 		Destroy (gameObject);

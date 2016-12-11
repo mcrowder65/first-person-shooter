@@ -15,7 +15,6 @@ public abstract class Projectile : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
         if (killTimer.IncrementIfEnabled())
         {
             Destroy(this.gameObject);
