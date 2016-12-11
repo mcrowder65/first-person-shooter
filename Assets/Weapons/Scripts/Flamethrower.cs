@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.Networking;
 
 public class Flamethrower : Weapon {
 
 
     public GameObject flamePrefab;
-    
-    public override Projectile CreateProjectile(Transform crosshair)
+
+    public override Projectile CmdCreateProjectile(Transform crosshair)
     {
       //  Vector3 pos;
        // Vector3 forwardY = Quaternion.Euler(0.0f, pitch, 0.0f) * Vector3.forward;

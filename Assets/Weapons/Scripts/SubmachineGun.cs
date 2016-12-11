@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.Networking;
 
 public class SubmachineGun : Weapon {
 
     public GameObject bulletPrefab;
 
-
-    public override Projectile CreateProjectile(Transform crosshair)
+    
+    public override Projectile CmdCreateProjectile(Transform crosshair)
     {
         var bullet = (GameObject)Instantiate(
                          bulletPrefab,
@@ -17,15 +18,17 @@ public class SubmachineGun : Weapon {
                          null);
 
 
+        Vector3 preForward = bullet.transform.forward;
+        bullet.transform.Rotate(Vector3.up, 90);
         bullet.GetComponent<Bullet>().dummyEulerRotation = bullet.transform.eulerAngles;
 
 
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 100;
+        bullet.GetComponent<Rigidbody>().velocity = preForward * 100;
         bullet.GetComponent<Bullet>().owner = transform.parent.gameObject;
         Debug.Assert(bullet.GetComponent<Bullet>().owner != null);
 
         //TODO figure out how to rotate bullet correctly on client and server.
-         bullet.transform.Rotate(Vector3.up, 90);
+     //    bullet.transform.Rotate(Vector3.up, 90);
         GetComponent<AudioSource>().Play();
 
         RaiseShotFired();

@@ -197,7 +197,7 @@ public abstract class PlayerController : NetworkBehaviour
         // Create the Bullet from the Bullet Prefab
         var canvas = transform.Find("Canvas");
         var crossHair = canvas.Find("Crosshair");
-        Projectile projectile = currentWeapon.CreateProjectile(crossHair);
+        Projectile projectile = currentWeapon.CmdCreateProjectile(crossHair);
         Destroy(projectile.gameObject, 2f);
         NetworkServer.Spawn(projectile.gameObject);
         projectile.RpcSetRotation();

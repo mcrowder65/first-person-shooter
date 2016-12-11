@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.Networking;
 
-public abstract class Weapon : MonoBehaviour {
+public abstract class Weapon : NetworkBehaviour {
 
 
     public float pitch = Constants.INVALID_PITCH;
@@ -50,7 +51,7 @@ public abstract class Weapon : MonoBehaviour {
         cooldownTimer.Enabled = true;
     }
 
-    public abstract Projectile CreateProjectile(Transform crosshair);
+    public abstract Projectile CmdCreateProjectile(Transform crosshair);
     public virtual float CooldownPeriod
     {
         get { throw new UnityException("CooldownPeriod was not overridden."); }
