@@ -80,7 +80,7 @@ public abstract class PlayerController : NetworkBehaviour
     private void PlayerController_EndKillcam()
     {
         Dead = false;
-        GetComponent<Health>().RpcRespawn();
+        GetComponent<Health>().CmdRespawn();
     }
 
     public override void OnStartLocalPlayer ()
@@ -112,7 +112,7 @@ public abstract class PlayerController : NetworkBehaviour
 
         Camera cam = myCamera;
         //TODO: Generalize to work with any type of gun
-		var gun = transform.Find ("SubmachineGun");
+        var gun = currentWeapon;
 		if (currentWeapon.pitch == Constants.INVALID_PITCH) {
             currentWeapon.pitch = cam.transform.eulerAngles.x;
 		}
@@ -212,7 +212,8 @@ public abstract class PlayerController : NetworkBehaviour
 		scoreboard.GetComponent<UnityEngine.UI.Text> ().text = "Kills: " + health.kills + " Deaths: " + health.deaths;
 	}
 
-    public void Death()
+    [Command]
+    public void CmdDeath()
     {
         if (!Dead)
         {

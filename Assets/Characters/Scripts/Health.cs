@@ -31,7 +31,7 @@ public class Health : NetworkBehaviour
                 ++deaths;
 
                 firer.GetComponent<Health>().kills++;
-                GetComponentInParent<PlayerController>().Death();
+                GetComponentInParent<PlayerController>().CmdDeath();
             }
         }
 	}
@@ -43,7 +43,7 @@ public class Health : NetworkBehaviour
             currentHealth = 0;
             ++deaths;
             --kills;
-            GetComponentInParent<PlayerController>().Death();
+            GetComponentInParent<PlayerController>().CmdDeath();
         }
     }
     void OnChangeDeaths(int deaths) {
@@ -84,5 +84,12 @@ public class Health : NetworkBehaviour
             currentHealth = Constants.MAX_HEALTH;
 
         }
+    }
+
+    [Command]
+    public void CmdRespawn()
+    {
+        RpcRespawn();
+       
     }
 }

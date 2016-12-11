@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.Networking;
 
-public class Killcam : MonoBehaviour {
+public class Killcam : NetworkBehaviour {
 
 
     public event Action EndKillcam;
