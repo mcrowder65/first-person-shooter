@@ -24,7 +24,7 @@ public class Killcam : MonoBehaviour {
         originalParent = target.transform;
         originalPosition = transform.localPosition;
 
-        Debug.Log("ORIG: " + originalPosition.ToString());
+        //Debug.Log("ORIG: " + originalPosition.ToString());
         transform.SetParent(null, true);
         transform.position = target.transform.position + Vector3.up * STARTING_Y_OFFSET;
         transform.LookAt(target.transform);
@@ -48,7 +48,7 @@ public class Killcam : MonoBehaviour {
                 transform.rotation = originalRotation;
                 transform.localPosition = originalPosition;
 
-                Debug.Log("NEW: " + transform.position.ToString());
+                //Debug.Log("NEW: " + transform.position.ToString());
                 //GetComponent<Animator>().SetTrigger("EndKillcam");
                 yield break;
             }

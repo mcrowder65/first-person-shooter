@@ -11,7 +11,6 @@ public abstract class PlayerController : NetworkBehaviour
 	public float speedH = 2.0f;
 	private float yaw = -1f;
 	public float speedV = 2.0f;
-
 	public Transform bulletSpawn;
 
 
@@ -49,17 +48,8 @@ public abstract class PlayerController : NetworkBehaviour
         //TODO: THIS IS TEMPORARY
         GameObject weapon = (GameObject) Instantiate(SubmachinegunPrefab, this.transform, false);
         currentWeapon = weapon.GetComponent<Weapon>();
-
-        if (isServer)
-        {
-            transform.gameObject.tag = "server";
-        }
-        else
-        {
-            transform.gameObject.tag = "client";
-        }
     }
-
+    
     private void PlayerController_EndKillcam()
     {
         Dead = false;
@@ -166,7 +156,6 @@ public abstract class PlayerController : NetworkBehaviour
 		}
 		var health = GetComponent<Health> ();
 		health.deathByFalling ();
-		updateScoreboard ();
 		return true;
 	}
 
@@ -204,16 +193,24 @@ public abstract class PlayerController : NetworkBehaviour
             GetComponent<GameAnimator>().DoFallAnimation();
         }
     }
-	void Update ()
+
+   
+    void Update ()
 	{
-        BaymaxController[] objs = GameObject.FindObjectsOfType<BaymaxController>();
         if (!isLocalPlayer) {
-			GetComponentInChildren<Camera> ().enabled = false;
+            if(GetComponentInChildren<Camera>() != null)
+            {
+                GetComponentInChildren<Camera>().enabled = false;
+            }
+			
 			return;
 		}
+
 		if (deathByFalling ()) {
 			return;
 		}
+        var health = GetComponent<Health>();
+        //Debug.Log("kills: " + health.kills + " deaths: " + health.deaths);
 		rotateHorizontally ();
 		CmdRotateVertically ();
 		if (Utilities.isXboxController ()) {
@@ -223,7 +220,6 @@ public abstract class PlayerController : NetworkBehaviour
 				jump ();
 			}
 			float triggerInput = Input.GetAxis ("Triggers");
-			//Debug.Log(triggerInput);
 			if (triggerInput > 0) { //left trigger
 				Debug.Log ("Grenade!!!");
 			} else if (triggerInput < 0) { //right trigger

@@ -5,7 +5,7 @@ Builds/*
 #Library/assetDatabase3
 Temp/*
 #Library/AssetImportState
-
+build_Data/*
 #Library/AssetServerCacheV3
 
 #Library/EditorUserBuildSettings.asset
