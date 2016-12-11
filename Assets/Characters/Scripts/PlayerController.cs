@@ -169,49 +169,21 @@ public abstract class PlayerController : NetworkBehaviour
 		updateScoreboard ();
 		return true;
 	}
+
     [Command]
-	public void CmdFire (bool server)
+	public void CmdFire ()
 	{
         if (Dead) return;
 
         if (!currentWeapon.CanFire)
             return;
-        Transform tranny;
-        if (server)
-        {
-            GameObject obj = GameObject.FindGameObjectWithTag("server");
 
-
-            GameObject client = GameObject.FindGameObjectWithTag("client");
-            tranny = obj.transform;
-        }
-        else
-        {
-
-            tranny = transform;
-        }
-        var canvas = tranny.Find ("Canvas");
-		var crossHair = canvas.Find ("Crosshair");
         // Create the Bullet from the Bullet Prefab
-
+        var canvas = transform.Find("Canvas");
+        var crossHair = canvas.Find("Crosshair");
         Projectile projectile = currentWeapon.CreateProjectile(crossHair);
+        Destroy(projectile.gameObject, 2f);
         NetworkServer.Spawn(projectile.gameObject);
-
-        //var bullet = (GameObject)Instantiate (
-        //	             bulletPrefab,
-        //	             crossHair.position,
-        //	             bulletSpawn.rotation,
-        //	             transform);
-        //// Add velocity to the bullet
-
-        //bullet.GetComponent<Rigidbody> ().velocity = bullet.transform.forward * 100;
-
-
-        //      // Destroy the bullet after 2 seconds
-        //      Destroy(bullet, 1.5f);
-
-        // Spawn the bullet on the Clients
-        //  NetworkServer.Spawn (bullet);
 
     }
 
@@ -234,8 +206,8 @@ public abstract class PlayerController : NetworkBehaviour
     }
 	void Update ()
 	{
-        Debug.Log(transform.gameObject.tag);
-		if (!isLocalPlayer) {
+        BaymaxController[] objs = GameObject.FindObjectsOfType<BaymaxController>();
+        if (!isLocalPlayer) {
 			GetComponentInChildren<Camera> ().enabled = false;
 			return;
 		}
@@ -255,7 +227,7 @@ public abstract class PlayerController : NetworkBehaviour
 			if (triggerInput > 0) { //left trigger
 				Debug.Log ("Grenade!!!");
 			} else if (triggerInput < 0) { //right trigger
-				CmdFire (isServer);
+                CmdFire();
 			}
 		} else {
 			if (Input.GetKey (KeyCode.A)) {
@@ -274,15 +246,11 @@ public abstract class PlayerController : NetworkBehaviour
 				jump ();
 			}
 			if (Input.GetKey (KeyCode.Mouse0)) {
-                if (isServer)
-                {
-                    transform.gameObject.tag = "server";
-                }
-                else
-                {
-                    transform.gameObject.tag = "client";
-                }
-                CmdFire (isServer);
+               
+                var canvas = transform.Find("Canvas");
+                var crossHair = canvas.Find("Crosshair");
+                Vector3 crossHairPosition = crossHair.position;
+                CmdFire ();
 			}
             if (Input.GetKey(KeyCode.R))
             {
