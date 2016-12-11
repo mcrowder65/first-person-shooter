@@ -13,6 +13,8 @@ public abstract class PlayerController : NetworkBehaviour
 	public float speedV = 2.0f;
 	public Transform bulletSpawn;
 
+    public Camera myCamera;
+
 
     //TODO: THIS IS TEMPORARY
     public GameObject SubmachinegunPrefab;
@@ -36,34 +38,43 @@ public abstract class PlayerController : NetworkBehaviour
     }
 
 
-	// Use this for initialization
-	public void Start ()
-	{
-		updateScoreboard ();
-		Physics.gravity = new Vector3 (0, -50, 0);
+    // Use this for initialization
+    public void Start()
+    {
+        updateScoreboard();
+        Physics.gravity = new Vector3(0, -50, 0);
 
         GetComponentInChildren<AudioListener>().enabled = isLocalPlayer;
 
         GetComponentInChildren<Killcam>().EndKillcam += PlayerController_EndKillcam;
         //TODO: THIS IS TEMPORARY
-        GameObject weapon = (GameObject) Instantiate(SubmachinegunPrefab, this.transform, false);
+        GameObject weapon = (GameObject)Instantiate(SubmachinegunPrefab, this.transform, false);
         currentWeapon = weapon.GetComponent<Weapon>();
+
+        myCamera = GetComponentInChildren<Camera>();
 
 
         if (isLocalPlayer)
         {
             Respawn newRespawn = Utilities.getNewRespawnPoint();
 
-            var cam = GetComponentInChildren<Camera>();
+            var cam = myCamera;
             Debug.Assert(cam != null);
             var gun = currentWeapon;
             Debug.Assert(gun != null);
 
             newRespawn.setRespawn(gameObject, cam.gameObject, gun.gameObject);
+
+
+
         }
-
-
-
+        gameObject.name = isLocalPlayer ? "Baymax (Me) " : "Baymax (Enemy)";
+        /*
+            if (Network.isServer)
+                gameObject.name = isLocalPlayer ? "Baymax (Server)" : "Baymax (Client)";
+            else
+                gameObject.name = isLocalPlayer ? "Baymax (Client)" : "Baymax (Server)";
+        */
     }
 
     private void PlayerController_EndKillcam()
@@ -94,11 +105,12 @@ public abstract class PlayerController : NetworkBehaviour
 		transform.Translate (vect * moveSpeed * Time.deltaTime);
 	}
 
+    
 	void CmdRotateVertically ()
 	{
         if (Dead) return;
 
-        Camera cam = GetComponentInChildren<Camera> ();
+        Camera cam = myCamera;
         //TODO: Generalize to work with any type of gun
 		var gun = transform.Find ("SubmachineGun");
 		if (currentWeapon.pitch == Constants.INVALID_PITCH) {
@@ -115,8 +127,8 @@ public abstract class PlayerController : NetworkBehaviour
 		gun.transform.eulerAngles = new Vector3 (gun.transform.eulerAngles.x, gun.transform.eulerAngles.y, currentWeapon.pitch);
 	}
 
-   
-	void rotateHorizontally ()
+  
+	void CmdRotateHorizontally ()
 	{
         if (Dead) return;
 
@@ -188,6 +200,7 @@ public abstract class PlayerController : NetworkBehaviour
         Projectile projectile = currentWeapon.CreateProjectile(crossHair);
         Destroy(projectile.gameObject, 2f);
         NetworkServer.Spawn(projectile.gameObject);
+        projectile.RpcSetRotation();
 
     }
 
@@ -226,7 +239,7 @@ public abstract class PlayerController : NetworkBehaviour
 		}
         var health = GetComponent<Health>();
         //Debug.Log("kills: " + health.kills + " deaths: " + health.deaths);
-		rotateHorizontally ();
+		CmdRotateHorizontally ();
 		CmdRotateVertically ();
 		if (Utilities.isXboxController ()) {
 			moveLeftOrRight (Input.GetAxis ("Left joystick left right"));

@@ -27,7 +27,7 @@ public class Flamethrower : Weapon {
         // flame.transform.position = pos;
         //flame.transform.rotation = rotation;
 
-        flame.GetComponent<Flame>().owner = transform.parent.GetComponent<PlayerController>();
+        flame.GetComponent<Flame>().owner = transform.parent.gameObject;
 
         RaiseShotFired();
 

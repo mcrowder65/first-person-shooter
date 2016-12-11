@@ -13,16 +13,19 @@ public class SubmachineGun : Weapon {
                          bulletPrefab,
                          crosshair.position,
                          crosshair.rotation,
-                         //Quaternion.Euler(transform.parent.rotation.eulerAngles.x + pitch, transform.parent.rotation.eulerAngles.y - 90, transform.parent.rotation.eulerAngles.z),
+                        // Quaternion.Euler(transform.parent.rotation.eulerAngles.x + pitch, transform.parent.rotation.eulerAngles.y - 90, transform.parent.rotation.eulerAngles.z),
                          null);
 
-    
+
+        bullet.GetComponent<Bullet>().dummyEulerRotation = bullet.transform.eulerAngles;
+
+
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 100;
-        bullet.GetComponent<Bullet>().owner = transform.parent.GetComponent<PlayerController>();
+        bullet.GetComponent<Bullet>().owner = transform.parent.gameObject;
         Debug.Assert(bullet.GetComponent<Bullet>().owner != null);
 
         //TODO figure out how to rotate bullet correctly on client and server.
-        //bullet.transform.Rotate(Vector3.up, 90);
+         bullet.transform.Rotate(Vector3.up, 90);
         GetComponent<AudioSource>().Play();
 
         RaiseShotFired();

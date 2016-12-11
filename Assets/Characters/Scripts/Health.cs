@@ -65,6 +65,7 @@ public class Health : NetworkBehaviour
     }
 	void OnChangeHealth (int currentHealth)
 	{
+        //TODO: Do we want to set currentHealth here too?
 		healthBar.sizeDelta = new Vector2 (currentHealth, healthBar.sizeDelta.y);
 	}
 
@@ -73,10 +74,10 @@ public class Health : NetworkBehaviour
 	{
 		if (isLocalPlayer) {
             Respawn newRespawn = Utilities.getNewRespawnPoint();
-            var cam = GetComponentInChildren<Camera>();
-            Debug.Log(cam != null);
+            var cam = GetComponent<PlayerController>().myCamera;
+            Debug.Assert(cam != null);
             var gun = GetComponent<PlayerController>().currentWeapon;
-            Debug.Log(gun != null);
+            Debug.Assert(gun != null);
 
             newRespawn.setRespawn(gameObject, cam.gameObject, gun.gameObject);
             GetComponent<Rigidbody>().velocity = Vector3.zero;
