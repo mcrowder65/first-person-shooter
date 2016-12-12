@@ -8,42 +8,40 @@ public class Health : NetworkBehaviour
 
 
 
-	[SyncVar (hook = "OnChangeHealth")]
-	public int currentHealth = Constants.MAX_HEALTH;
-    [SyncVar (hook = "OnChangeDeaths")]
-	public int deaths = 0;
-    [SyncVar (hook = "OnChangeKills")]
-	public int kills = 0;
-	public RectTransform healthBar;
+    [SyncVar(hook = "OnChangeHealth")]
+    public int currentHealth = Constants.MAX_HEALTH;
+    [SyncVar(hook = "OnChangeDeaths")]
+    public int deaths = 0;
+    [SyncVar(hook = "OnChangeKills")]
+    public int kills = 0;
+    public RectTransform healthBar;
 
-	public void TakeDamage (int amount, Transform firer)
-	{
-		//if (!isServer)
-		//	return;
-
+    public void TakeDamage(int amount, Transform firer)
+    {
         if (!GetComponentInParent<PlayerController>().Dead)
         {
             currentHealth -= amount;
             if (currentHealth <= 0)
             {
-                
+
                 currentHealth = Constants.MAX_HEALTH;
                 ++deaths;
 
                 firer.GetComponent<Health>().kills++;
-                CmdDeath(GetComponentInParent<PlayerController>().gameObject);
+                RpcDeath(GetComponentInParent<PlayerController>().gameObject);
             }
         }
-	}
-        
-   	public void deathByFalling ()
-	{
+    }
+
+    [Command]
+    public void CmdDeathByFalling()
+    {
         if (!GetComponentInParent<PlayerController>().Dead)
         {
             currentHealth = 0;
             ++deaths;
             --kills;
-            CmdDeath(GetComponentInParent<PlayerController>().gameObject);
+            RpcDeath(GetComponentInParent<PlayerController>().gameObject);
         }
     }
     void OnChangeDeaths(int deaths) {
@@ -51,7 +49,7 @@ public class Health : NetworkBehaviour
         updateScoreboard();
     }
 
-    void OnChangeKills( int kills)
+    void OnChangeKills(int kills)
     {
         this.kills = kills;
         updateScoreboard();
@@ -61,20 +59,20 @@ public class Health : NetworkBehaviour
         var baymax = GetComponentInParent<PlayerController>();
         var canvas = baymax.transform.Find("Canvas");
         var scoreboard = canvas.transform.Find("Scoreboard");
-        if(deaths > 100)
+        if (deaths > 100)
         {
             deaths = 0; // had to hard code this in... idk how it's getting set to 485 randomly...
         }
         scoreboard.GetComponent<UnityEngine.UI.Text>().text = "Kills: " + kills + " Deaths: " + deaths;
     }
-	void OnChangeHealth (int currentHealth)
-	{
+    void OnChangeHealth(int currentHealth)
+    {
         //TODO: Do we want to set currentHealth here too?
-		healthBar.sizeDelta = new Vector2 (currentHealth, healthBar.sizeDelta.y);
-	}
+        healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+    }
 
-    [Command]
-    public void CmdDeath(GameObject subject)
+    [ClientRpc]
+    public void RpcDeath(GameObject subject)
     {
         PlayerController controller = subject.GetComponent<PlayerController>();
         if (!controller.Dead)

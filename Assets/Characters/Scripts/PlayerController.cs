@@ -242,7 +242,7 @@ public abstract class PlayerController : NetworkBehaviour
 			return false;
 		}
 		var health = GetComponent<Health> ();
-		health.deathByFalling ();
+		health.CmdDeathByFalling ();
 		return true;
 	}
 
