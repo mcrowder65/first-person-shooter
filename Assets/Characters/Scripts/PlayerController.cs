@@ -36,6 +36,50 @@ public abstract class PlayerController : NetworkBehaviour
             _dead = value;
         }
     }
+    private bool _walking = false;
+    public bool Walking
+    {
+        get { return _walking; }
+        protected set
+        {
+            bool old = _walking;
+            if (old != value)
+            {
+                _walking = value;
+                if (_walking)
+                    GetComponent<GameAnimator>().BeginWalk(LeftLeg, RightLeg);
+                else
+                    GetComponent<GameAnimator>().EndWalk();
+            }
+        }
+    }
+
+    //This could be overridden if necessary
+    public GameObject LeftLeg
+    {
+        get
+        {
+            return GetPiece(PieceType.LeftLeg);
+        }
+    }
+    public GameObject RightLeg
+    {
+        get
+        {
+            return GetPiece(PieceType.RightLeg);
+        }
+    }
+
+    public GameObject GetPiece(PieceType type)
+    {
+        foreach (var p in GetComponentsInChildren<PlayerPiece>())
+        {
+            if (p.TypeOfPiece == type)
+                return p.gameObject;
+        }
+        return null;
+    }
+
 
 
     // Use this for initialization
@@ -255,18 +299,26 @@ public abstract class PlayerController : NetworkBehaviour
                 CmdFire();
 			}
 		} else {
+            bool moved = false;
 			if (Input.GetKey (KeyCode.A)) {
 				moveLeftOrRight (-1);
+                moved = true;
 			}
 			if (Input.GetKey (KeyCode.D)) {
 				moveLeftOrRight (1);
-			}
+                moved = true;
+            }
 			if (Input.GetKey (KeyCode.W)) {
 				moveForwardsOrBackwards (-1);
-			}
+                moved = true;
+            }
 			if (Input.GetKey (KeyCode.S)) {
 				moveForwardsOrBackwards (1);
-			}
+                moved = true;
+            }
+            Walking = moved;
+    
+
 			if (Input.GetKeyUp (KeyCode.Space)) {
 				jump ();
 			}
@@ -277,10 +329,7 @@ public abstract class PlayerController : NetworkBehaviour
                 Vector3 crossHairPosition = crossHair.position;
                 CmdFire ();
 			}
-            if (Input.GetKey(KeyCode.R))
-            {
-                GetComponent<Rigidbody>().velocity = Vector3.zero;
-            }
+           
 		}
 
         if (jumpCooldownTimer.IncrementIfEnabled())

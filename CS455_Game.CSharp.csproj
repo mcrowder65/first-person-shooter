@@ -75,7 +75,9 @@
     <Compile Include="Assets\Characters\Scripts\CharacterTools.cs" />
     <Compile Include="Assets\Characters\Scripts\GameAnimator.cs" />
     <Compile Include="Assets\Characters\Scripts\Health.cs" />
+    <Compile Include="Assets\Characters\Scripts\PieceType.cs" />
     <Compile Include="Assets\Characters\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Characters\Scripts\PlayerPiece.cs" />
     <Compile Include="Assets\Characters\Scripts\Respawn.cs" />
     <Compile Include="Assets\ChoosePlayer.cs" />
     <Compile Include="Assets\Constants.cs" />
