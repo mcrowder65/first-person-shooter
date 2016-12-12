@@ -61,6 +61,10 @@ public class Health : NetworkBehaviour
         var baymax = GetComponentInParent<PlayerController>();
         var canvas = baymax.transform.Find("Canvas");
         var scoreboard = canvas.transform.Find("Scoreboard");
+        if(deaths > 100)
+        {
+            deaths = 0; // had to hard code this in... idk how it's getting set to 485 randomly...
+        }
         scoreboard.GetComponent<UnityEngine.UI.Text>().text = "Kills: " + kills + " Deaths: " + deaths;
     }
 	void OnChangeHealth (int currentHealth)
