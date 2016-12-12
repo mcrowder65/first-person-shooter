@@ -17,7 +17,9 @@ static class Utilities
     private static List<Respawn> hearthSpawnPositions = new List<Respawn>(
                                                             new Respawn[] {
             new Respawn(new Vector3 (312f, 28.5f, 154.2f), new Vector3(0f, 0f, 0f),  new Vector3(0f, -90f, 0f), new Vector3(0f, 0f, 0f)),
-            new Respawn(new Vector3 (146.5f, 28.8f, 169.5f), new Vector3(0f, 0f, 0f),  new Vector3(0f, -90f, 0f), new Vector3(0f, 0f, 0f))
+            new Respawn(new Vector3 (146.5f, 28.8f, 169.5f), new Vector3(0f, 0f, 0f),  new Vector3(0f, -90f, 0f), new Vector3(0f, 0f, 0f)),
+            new Respawn(new Vector3(150f, 31.09f, 52.6f), new Vector3(0, 0, 0f),  new Vector3(0f, -90f, 0f), new Vector3(0f, 0f, 0f)),
+            new Respawn(new Vector3(376f, 26.3f, 356.4f), new Vector3(0, 0, 0),  new Vector3(0f, -90f, 0f), new Vector3(0f, 0f, 0f))
         });
     public static bool isXboxController ()
 	{
