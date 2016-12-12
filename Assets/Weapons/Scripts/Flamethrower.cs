@@ -18,8 +18,13 @@ public class Flamethrower : Weapon {
        // Quaternion rotation = Quaternion.identity;
         GameObject flame = (GameObject)GameObject.Instantiate(flamePrefab,
                                                             crosshair.position, 
-                                                           Quaternion.Euler(transform.parent.rotation.eulerAngles.x + pitch, transform.parent.rotation.eulerAngles.y - 90, transform.parent.rotation.eulerAngles.z),
+                                                            crosshair.rotation,
+                                                           //Quaternion.Euler(transform.parent.rotation.eulerAngles.x + pitch, transform.parent.rotation.eulerAngles.y - 90, transform.parent.rotation.eulerAngles.z),
                                                            transform);
+
+        Vector3 preForward = flame.transform.forward;
+
+        flame.GetComponent<Flame>().dummyEulerRotation = flame.transform.eulerAngles;
 
         // set the start point near the player
         //  rotation = transform.rotation;

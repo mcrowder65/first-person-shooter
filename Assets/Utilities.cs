@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 static class Utilities
 {
 	
-	private static System.Random rand = new System.Random ();
+	public static System.Random rand = new System.Random ();
     private static List<Respawn> lockoutSpawnPositions = new List<Respawn>(
                                                             new Respawn[] {
             new Respawn(new Vector3 (-2.44f, 70.73669f, -144.27f), new Vector3(0f, 81f, 0f),  new Vector3(3f, -90f, 0), new Vector3(0f, 3f, 3.5f)),

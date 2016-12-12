@@ -31,7 +31,7 @@ public class Health : NetworkBehaviour
                 ++deaths;
 
                 firer.GetComponent<Health>().kills++;
-                GetComponentInParent<PlayerController>().CmdDeath();
+                CmdDeath(GetComponentInParent<PlayerController>().gameObject);
             }
         }
 	}
@@ -43,7 +43,7 @@ public class Health : NetworkBehaviour
             currentHealth = 0;
             ++deaths;
             --kills;
-            GetComponentInParent<PlayerController>().CmdDeath();
+            CmdDeath(GetComponentInParent<PlayerController>().gameObject);
         }
     }
     void OnChangeDeaths(int deaths) {
@@ -73,7 +73,19 @@ public class Health : NetworkBehaviour
 		healthBar.sizeDelta = new Vector2 (currentHealth, healthBar.sizeDelta.y);
 	}
 
-	[ClientRpc]
+    [Command]
+    public void CmdDeath(GameObject subject)
+    {
+        PlayerController controller = subject.GetComponent<PlayerController>();
+        if (!controller.Dead)
+        {
+            controller.Dead = true;
+            controller.GetComponentInChildren<Killcam>().BeginKillcam(this.gameObject);
+            controller.GetComponent<GameAnimator>().DoFallAnimation();
+        }
+    }
+
+    [ClientRpc]
 	public void RpcRespawn ()
 	{
 		if (isLocalPlayer) {

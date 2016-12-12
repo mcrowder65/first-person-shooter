@@ -43,7 +43,7 @@ public class GameAnimator : MonoBehaviour {
     bool walkingRightNow = false;
     public void BeginWalk(GameObject leftLeg, GameObject rightLeg)
     {
-        if (stoppedWalking) return;
+        if (walkingRightNow) return;
 
         StartCoroutine(WalkAnimation(leftLeg, rightLeg, 10f));
     }

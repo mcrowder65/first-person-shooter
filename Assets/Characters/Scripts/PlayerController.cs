@@ -26,16 +26,17 @@ public abstract class PlayerController : NetworkBehaviour
     private GenericTimer jumpCooldownTimer = new GenericTimer(0.5f, false);
     private bool jumpIsCoolingDown = false;
 
-
+    [SyncVar(hook = "OnDeadChanged")]
     private bool _dead = false;
     public bool Dead
     {
         get { return _dead; }
-        protected set
+        set
         {
             _dead = value;
         }
     }
+    [SyncVar(hook= "OnWalkingChanged")]
     private bool _walking = false;
     public bool Walking
     {
@@ -43,15 +44,24 @@ public abstract class PlayerController : NetworkBehaviour
         protected set
         {
             bool old = _walking;
-            if (old != value)
-            {
+           // if (old != value)
+            //{
                 _walking = value;
                 if (_walking)
                     GetComponent<GameAnimator>().BeginWalk(LeftLeg, RightLeg);
                 else
                     GetComponent<GameAnimator>().EndWalk();
-            }
+           // }
         }
+    }
+
+    public void OnDeadChanged(bool dead)
+    {
+        Dead = dead;
+    }
+    public void OnWalkingChanged(bool walking)
+    {
+        Walking = walking;
     }
 
     //This could be overridden if necessary
@@ -92,7 +102,10 @@ public abstract class PlayerController : NetworkBehaviour
 
         GetComponentInChildren<Killcam>().EndKillcam += PlayerController_EndKillcam;
         //TODO: THIS IS TEMPORARY
-        GameObject weapon = (GameObject)Instantiate(SubmachinegunPrefab, this.transform, false);
+
+
+
+        GameObject weapon = (GameObject)Instantiate(Utilities.rand.Next(0, 2) == 0 ? SubmachinegunPrefab : FlamethrowerPrefab, this.transform, false);
         currentWeapon = weapon.GetComponent<Weapon>();
 
         myCamera = GetComponentInChildren<Camera>();
@@ -124,6 +137,9 @@ public abstract class PlayerController : NetworkBehaviour
     private void PlayerController_EndKillcam()
     {
         Dead = false;
+        Destroy(GetComponentInChildren<Weapon>().gameObject);
+        GameObject weapon = (GameObject)Instantiate(Utilities.rand.Next(0, 2) == 0 ? SubmachinegunPrefab : FlamethrowerPrefab, this.transform, false);
+        currentWeapon = weapon.GetComponent<Weapon>();
         GetComponent<Health>().CmdRespawn();
     }
 
@@ -256,16 +272,7 @@ public abstract class PlayerController : NetworkBehaviour
 		scoreboard.GetComponent<UnityEngine.UI.Text> ().text = "Kills: " + health.kills + " Deaths: " + health.deaths;
 	}
 
-    [Command]
-    public void CmdDeath()
-    {
-        if (!Dead)
-        {
-            Dead = true;
-            GetComponentInChildren<Killcam>().BeginKillcam(this.gameObject);
-            GetComponent<GameAnimator>().DoFallAnimation();
-        }
-    }
+   
 
    
     void Update ()
@@ -316,7 +323,7 @@ public abstract class PlayerController : NetworkBehaviour
 				moveForwardsOrBackwards (1);
                 moved = true;
             }
-            Walking = moved;
+            Walking = moved && !Dead;
     
 
 			if (Input.GetKeyUp (KeyCode.Space)) {
