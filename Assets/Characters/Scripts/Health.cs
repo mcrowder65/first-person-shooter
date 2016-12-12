@@ -39,7 +39,6 @@ public class Health : NetworkBehaviour
     {
         if (!GetComponentInParent<PlayerController>().Dead)
         {
-            currentHealth = 0;
             ++deaths;
             --kills;
             RpcDeath(GetComponentInParent<PlayerController>().gameObject);

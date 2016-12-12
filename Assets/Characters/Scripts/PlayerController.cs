@@ -246,6 +246,7 @@ public abstract class PlayerController : NetworkBehaviour
 
 	bool deathByFalling ()
 	{
+        if (Dead) return false;
 		if (transform.position.y > Utilities.GetDeathY(Utilities.GetCurrentScene())) {
 			return false;
 		}
