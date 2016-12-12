@@ -26,14 +26,37 @@ static class Utilities
 		return Input.GetJoystickNames ().Length > 0 && Input.GetJoystickNames () [0].ToString () == "Controller (XBOX 360 For Windows)";
 	}
 
-	public static Respawn getNewRespawnPoint ()
+    public static Respawn getRandomRespawnPoint()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        List<Respawn> possibles = sceneName == "Lockout" ? lockoutSpawnPositions : hearthSpawnPositions;
+        return possibles[rand.Next(0, possibles.Count)];
+    }
+	public static Respawn getNewRespawnPoint (GameObject enemy)
 	{
 		string sceneName = SceneManager.GetActiveScene ().name;
+        List<Respawn> possibles = sceneName == "Lockout" ? lockoutSpawnPositions : hearthSpawnPositions;
+        return getFurthestSpawn(possibles, enemy);
+        /*
 		int min = 0;
 		int max = sceneName == "Lockout" ? lockoutSpawnPositions.Count : hearthSpawnPositions.Count;
 		int randomIndex = rand.Next (min, max);
 		return sceneName == "Lockout" ? lockoutSpawnPositions [randomIndex] : hearthSpawnPositions [randomIndex];
+        */
 	}
+
+    public static Respawn getFurthestSpawn(List<Respawn> possibles, GameObject enemy)
+    {
+        Respawn furthest = null;
+        foreach (var r in possibles)
+        {
+            if (furthest == null || Vector3.Distance(r.position, enemy.transform.position) > Vector3.Distance(furthest.position, enemy.transform.position))
+            {
+                furthest = r;
+            }
+        }
+        return furthest;
+    }
 
     public static SceneEnum GetCurrentScene()
     {

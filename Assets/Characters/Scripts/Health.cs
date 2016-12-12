@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Health : NetworkBehaviour
 {
@@ -87,7 +88,17 @@ public class Health : NetworkBehaviour
 	public void RpcRespawn ()
 	{
 		if (isLocalPlayer) {
-            Respawn newRespawn = Utilities.getNewRespawnPoint();
+            PlayerController[] allPlayers = GameObject.FindObjectsOfType<PlayerController>();
+            Respawn newRespawn = null;
+            foreach (var p in allPlayers)
+            {
+                if (p.gameObject != gameObject) 
+                    newRespawn = Utilities.getNewRespawnPoint(p.gameObject);
+            }
+
+            if (newRespawn == null)
+                newRespawn = Utilities.getRandomRespawnPoint();
+
             var cam = GetComponent<PlayerController>().myCamera;
             Debug.Assert(cam != null);
             var gun = GetComponent<PlayerController>().currentWeapon;

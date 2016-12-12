@@ -113,7 +113,15 @@ public abstract class PlayerController : NetworkBehaviour
 
         if (isLocalPlayer)
         {
-            Respawn newRespawn = Utilities.getNewRespawnPoint();
+            PlayerController[] allPlayers = GameObject.FindObjectsOfType<PlayerController>();
+            Respawn newRespawn = null;
+            foreach (var p in allPlayers)
+            {
+                if (p.gameObject != gameObject)
+                    newRespawn = Utilities.getNewRespawnPoint(p.gameObject);
+            }
+            if (newRespawn == null)
+                newRespawn = Utilities.getRandomRespawnPoint();
 
             var cam = myCamera;
             Debug.Assert(cam != null);

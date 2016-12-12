@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Respawn {
-    private Vector3 position;
-    private Vector3 playerRotation;
-    private Vector3 cameraRotation;
-    private Vector3 gunRotation;
+    public Vector3 position;
+    public Vector3 playerRotation;
+    public Vector3 cameraRotation;
+    public Vector3 gunRotation;
 
     public Respawn(Vector3 position, Vector3 playerRotation, Vector3 cameraRotation, Vector3 gunRotation)
     {
