@@ -111,8 +111,8 @@ public abstract class PlayerController : NetworkBehaviour
         if (Dead) return;
 
         Camera cam = myCamera;
-        //TODO: Generalize to work with any type of gun
-        var gun = currentWeapon;
+        //TODO: idk if we'll be able to generalize this...
+        var gun = transform.Find("SubmachineGun");//currentWeapon;
 		if (currentWeapon.pitch == Constants.INVALID_PITCH) {
             currentWeapon.pitch = cam.transform.eulerAngles.x;
 		}
